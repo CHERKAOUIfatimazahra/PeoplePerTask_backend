@@ -10,7 +10,7 @@
     $sql = "INSERT INTO users (freelancer_name, email, password, job, salary) 
     VALUES ('$first_name', '$email', '$password', '$job', '$salary')";
 ?>
-<?php
+<?php 
 require './connexion.php';
 ?>
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ require './connexion.php';
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div> -->
 
-    <form class="flex flex-col flex-grow w-100" action="./create.php" method="POST">
+    <form class="flex flex-col flex-grow w-100" action="add_freelancer.php" method="POST">
             <input class="py-2 px-1 m-3 w-100 bg-gray-200 rounded-md" type="text" name="first_name" id="first_name" placeholder="First Name">
             <input class="py-2 px-1 m-3 w-100 bg-gray-200 rounded-md" type="text" name="last_name" id="last_name" placeholder="Last Name">
             <input class="py-2 px-1 m-3 w-100 bg-gray-200 rounded-md" type="email" name="email" id="email" placeholder="Email">
@@ -98,6 +98,35 @@ require './connexion.php';
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 </form>
+
+
+<?php 
+    require 'database.php'; // Include file for database connection
+
+    if(isset($_POST['submit'])){
+        $first_name = $_POST['first_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password']; // Ensure you're hashing passwords for security
+        $job = $_POST['job'];
+        $salary = $_POST['salary'];
+
+        // Establish a database connection (assuming $conn is your connection variable)
+        // Perform necessary sanitization/validations on user inputs
+
+        // Prepare the SQL statement using a prepared statement to prevent SQL injection
+        $stmt = $conn->prepare("INSERT INTO users (freelancer_name, email, password, job, salary) VALUES (?, ?, ?, ?, ?)");
+        
+        // Bind parameters to the statement
+        $stmt->bind_param("sssss", $first_name, $email, $password, $job, $salary);
+
+        // Execute the statement
+        $stmt->execute();
+
+        // Close the statement and database connection
+        $stmt->close();
+        $conn->close();
+    }
+?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

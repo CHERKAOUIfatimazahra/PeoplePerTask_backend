@@ -1,5 +1,5 @@
 <aside id="sidebar" class="side">
-    <div class="h-100">
+    <div class="h-50">
         <div class="sidebar_logo d-flex align-items-end">
             <img src="img/logo.svg" alt="icon">
             <a href="#" class="nav-link text-white-50">Dashboard</a>
@@ -10,7 +10,7 @@
             <li class="sidebar_item <?=$dashboard_active?>" style="width: 100%;">
                 <a href="dashboard.php" class="sidebar_link"> <img src="img/1. overview.svg" alt="icon">statistics</a>
             </li>
-            <li class="sidebar_item <?=$freelancer_active?>">
+            <li class="sidebar_item <?=$freelancer_active?>" style="width: 100%;">
                 <a href="freelancers.php" class="sidebar_link"> <img src="img/agents.svg" alt="icon">freelancer</a>
             </li>
             <li class="sidebar_item <?=$projects_active?>">

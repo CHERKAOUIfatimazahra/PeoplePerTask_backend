@@ -22,7 +22,7 @@
 
 <body>
     <div class="wrapper">
-        <?php
+            <?php
             require "sidebar.php";
             ?>
         <div class="main">
@@ -81,80 +81,33 @@
                 </div>
             </nav>
             <div class="container my-4 py-4">
-                <!-- Primary Button -->
-                <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalCenter1"> ADD New PROJECT</button>
-
-                <table id="example" class="table table-striped  " style="width:100%">
+  <!-- Primary Button -->
+<button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
+                               data-bs-target="#exampleModalCenter1"> ADD new category</button>
+                <table id="example" class="table table-striped table-info" style="width:100%">
                     <thead>
                         <tr class="table-dark">
                             <th>ID</th>
-                            <th>Project Title</title></th>
-                            <th>Description</th>
                             <th>category</th>
-                            <th>sub category</th>
+                            <th ></th>
                         </tr>
                     </thead>
                     <tbody>
-                        </tr>
+                        <button type="button" class="btn btn-danger mx-2">Delet</button> 
                     </tbody>
                 </table>
-
+                
             </div>
-
         </div>
     </div>
 
     <!-- Modal update -->
-    <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">New Project</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Project Title</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Description</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Project Title</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
-                            <option class="text-gray-500" disabled selected value="">category</option>
-                            </select>
-                        </div>
-                            <div class="mb-3">
-                            <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
-                            <option class="text-gray-500" disabled selected value="">sub category</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade modal-lg" id="exampleModalCenter1" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">New project</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Categorys modal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -162,23 +115,9 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Project Title</label>
+                            <label for="recipient-name" class="col-form-label">category</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Descriptio</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Project Title</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
-                        <option class="text-gray-500" disabled selected value="">category</option>
-                        </select>
-                        <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
-                        <option class="text-gray-500" disabled selected value="">sub category</option>
-                        </select>
                     </form>
                 </div>
                 <div class="modal-footer">

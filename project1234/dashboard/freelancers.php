@@ -86,7 +86,7 @@
                                data-bs-target="#exampleModalCenter1"> ADD freelancer</button>
                 <table id="example" class="table table-striped table-info" style="width:100%">
                     <thead>
-                        <tr class="table-">
+                        <tr class="table-dark">
                             <th>ID</th>
                             <th>Freelancer</th>
                             <th>SKILL</th>
@@ -98,9 +98,7 @@
                     <tbody>
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                data-bs-target="#exampleModalCenter">Modify</button> 
-                        <button type="button" class="btn btn-danger mx-2">Delet</button>  
-                            </td>
-                        </tr>
+                        <button type="button" class="btn btn-danger mx-2">Delet</button> 
                     </tbody>
                 </table>
                 
@@ -108,14 +106,13 @@
         </div>
     </div>
 
-
     <!-- Modal update -->
     <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modify Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,11 +120,19 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <label for="recipient-name" class="col-form-label">Freelancer name</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Message:</label>
+                            <label for="recipient-name" class="col-form-label">SKILL</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Email</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" id="message-text"></textarea>
                         </div>
                     </form>
@@ -151,10 +156,6 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                    <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">ID</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Freelancer name</label>
                             <input type="text" class="form-control" id="recipient-name">
@@ -164,11 +165,11 @@
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">SKILL</label>
+                            <label for="recipient-name" class="col-form-label">Email</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Message:</label>
+                            <label for="message-text" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" id="message-text"></textarea>
                         </div>
                     </form>

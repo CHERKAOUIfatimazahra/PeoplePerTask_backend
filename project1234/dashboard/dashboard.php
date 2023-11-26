@@ -1,12 +1,11 @@
-<?php
+<!-- 
 $projects_active = "";
 $freelancer_active = "";
 $dashboard_active = "active";
 $categorys_active = "";
 $Testimonial_active = "";
 require "../../backend/freelancer_script.php";
-getAllFreelancer();
-?>
+getAllFreelancer(); -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,12 +107,12 @@ getAllFreelancer();
         </nav>
         <section class="overview">
           <div class="row p-4">
-            <div class="col-xl-3 col-sm-6 col-12 mb-4">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
               <div class="card">
                 <div class="card-body p-4">
                   <div class="d-flex justify-content-between px-md-1">
                     <div>
-                      <p class="mb-0">Projects</p>
+                      <h4 class="mb-0">Projects</h4>
                       <div class="mt-4">
                         <h3><strong>18</strong></h3>
                         <p><strong>2</strong> Completed</p>
@@ -126,15 +125,15 @@ getAllFreelancer();
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12 mb-4">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
               <div class="card">
                 <div class="card-body p-4">
                   <div class="d-flex justify-content-between px-md-1">
                     <div>
-                      <p class="mb-0">Active Task</p>
+                      <h4 class="mb-0">Freelancers</h4>
                       <div class="mt-4">
                         <h3><strong>132</strong></h3>
-                        <p><strong>32</strong> Completed</p>
+                        <p><strong>32</strong> </p>
                       </div>
                     </div>
                     <div class="">
@@ -144,33 +143,15 @@ getAllFreelancer();
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12 mb-4">
+            <div class="col-xl-4 col-sm-6 col-12 mb-4">
               <div class="card">
                 <div class="card-body p-4">
                   <div class="d-flex justify-content-between px-md-1">
                     <div>
-                      <p class="mb-0">Teams</p>
-                      <div class="mt-4">
-                        <h3><strong>12</strong></h3>
-                        <p><strong></strong> Completed</p>
-                      </div>
-                    </div>
-                    <div class="">
-                      <img src="img/project-icon-3.svg" alt="icon" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body p-4">
-                  <div class="d-flex justify-content-between px-md-1">
-                    <div>
-                      <p class="mb-0">Projects</p>
+                      <h4 class="mb-0">Testimenial</h4>
                       <div class="mt-4">
                         <h3><strong>76%</strong></h3>
-                        <p><strong>57%</strong> Completed</p>
+                        <p><strong>6</strong> valide</p>
                       </div>
                     </div>
                     <div class="">
