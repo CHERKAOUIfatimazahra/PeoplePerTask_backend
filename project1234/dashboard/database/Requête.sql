@@ -1,5 +1,5 @@
-CREATE DATABASE peoplepertask;
-use peoplepertask;
+CREATE DATABASE peoplepertasks;
+use peoplepertasks;
 
 -- Structure de la table `region`
 --

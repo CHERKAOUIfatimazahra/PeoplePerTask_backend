@@ -83,15 +83,15 @@
             <div class="container my-4 py-4">
   <!-- Primary Button -->
   <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
-                               data-bs-target="#exampleModalCenter1"> ADD freelancer</button>
+                               data-bs-target="#exampleModalCenter1"> ADD user</button>
 <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
 data-bs-target="#exampleModalCenter"></button> 
                 <table id="example" class="table table-striped table-info" style="width:100%">
                     <thead>
                         <tr class="table-dark">
                             <th>ID</th>
-                            <th>Freelancer</th>
-                            <th>SKILL</th>
+                            <th>User</th>
+                            <th>Password</th>
                             <th>Email</th>
                             <th>OtherRelevantInformation</th>
                             <th ></th>
@@ -100,29 +100,26 @@ data-bs-target="#exampleModalCenter"></button>
                     <tbody>
                     <?php
                             require './data_connection/database.php';
-                            $query = "select f.Freelance_ID,f.NameFreelancer,f.SKILLS,u.email , u.OtherRelevantInformation from Freelancers f
-                            inner join users u 
-                            on f.UserID = u.UserID;";
+                            $query = "select * from users;";
 
                             $res = mysqli_query($con, $query);
                             if (mysqli_num_rows($res) > 0) :
                                 while ($row = mysqli_fetch_assoc($res)) :
                                     echo "<tr>";
-                                    echo "<td>" . $row['Freelance_ID'] . "</td>";
-                                    echo "<td>" . $row['NameFreelancer'] . "</td>";
-                                    echo "<td>" . $row['SKILLS'] . "</td>";
+                                    echo "<td>" . $row['UserID'] . "</td>";
+                                    echo "<td>" . $row['UserName'] . "</td>";
+                                    echo "<td>" . $row['Password'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
                                     echo "<td>" . $row['OtherRelevantInformation'] . "</td>";
-                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateFreelancer(' . $row['Freelance_ID'] . ' , \'' . $row['NameFreelancer'] . '\' , \'' . $row['SKILLS'] .'\' , \'' . $row['email'] .'\' , \''. $row['OtherRelevantInformation'] .'\')" >Modify</button> 
-                                    <button type="button" onclick="delete_freelancer(' . $row['Freelance_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
+                                    // modefy delet
+                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' , \''. $row['OtherRelevantInformation'] .'\')" >Modify</button> 
+                                    <button type="button" onclick="delete_user(' . $row['UserID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                     echo "</tr>";
                                 endwhile;
                             endif;
-
                         ?>
                     </tbody>
                 </table>
-                
             </div>
         </div>
     </div>
@@ -139,14 +136,14 @@ data-bs-target="#exampleModalCenter"></button>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form id="update_freelancer_form" action="./freelancers_CRUD/update_freelancer.php" method="POST">
+                <form id="update_user_form" action="./User_CRUD/update_user.php" method="POST">
                         <div class="mb-3">
-                            <label for="update_name" class="col-form-label">Freelancer name:</label>
+                            <label for="update_name" class="col-form-label">User name:</label>
                             <input type="text" class="form-control" name="update_name" id="update_name">
                         </div>
                         <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Skills:</label>
-                            <textarea class="form-control" name="update_skills" id="update_skills"></textarea>
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <textarea class="form-control" name="update_password" id="update_password"></textarea>
                         </div>
                         <input type="text" name="update_id" id="update_id" style="display:none;">
                         <div class="mb-3">
@@ -171,20 +168,20 @@ data-bs-target="#exampleModalCenter"></button>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Freelancer modal</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Users modal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="add_freelancer_form" action="./freelancers_CRUD/add_freelancer.php" method="POST">
+                    <form id="add_user_form" action="./User_CRUD/add_user.php" method="POST">
                     <div class="mb-3">
-                            <label for="name" class="col-form-label">Freelancer name</label>
+                            <label for="name" class="col-form-label">User name</label>
                             <input type="text" class="form-control" name="name" id="name">
                         </div>
                         <div class="mb-3">
-                            <label for="skills" class="col-form-label">SKILL</label>
-                            <input type="text" class="form-control" name="skills" id="skills">
+                            <label for="skills" class="col-form-label">Password</label>
+                            <input type="text" class="form-control" name="password" id="password">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
@@ -198,12 +195,12 @@ data-bs-target="#exampleModalCenter"></button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" onclick="add_freelancer()" class="btn btn-primary">Save changes</button>
+                    <button type="button" onclick="add_user()" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-    <form id="delete_freelancer_form" style="display:none" action="./freelancers_CRUD/delete_freelancer.php" method="POST" >
+    <form id="delete_user_form" style="display:none" action="./User_CRUD/delete_user.php" method="POST" >
         <input type="text" name="delete_id" id="delete_id">
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -215,27 +212,27 @@ data-bs-target="#exampleModalCenter"></button>
     <script src="js_fill/dashboard.js"></script>
     <script src="js_fill/script.js"></script>
     <script>
-        function add_freelancer() {
-            document.getElementById("add_freelancer_form").submit();
+        function add_user() {
+            document.getElementById("add_user_form").submit();
         };
 
         function submitUpdate() {
-            document.getElementById("update_freelancer_form").submit();
+            document.getElementById("update_user_form").submit();
         }
 
-        function updateFreelancer(id , NameFreelancer , SKILLS ,email ,OtherRelevantInformation) {
+        function updateUser(id , UserName , Password, email , OtherRelevantInformation) {
             document.getElementById("update_id").value = id;
-            document.getElementById("update_name").value = NameFreelancer;
-            document.getElementById("update_skills").value = SKILLS;
+            document.getElementById("update_name").value = UserName;
+            document.getElementById("update_password").value = Password;
             document.getElementById("update_email").value = email;
             document.getElementById("update_info").value = OtherRelevantInformation;
 
             document.getElementById('open_modal_button').click();
         };
 
-        function delete_freelancer(id) {
+        function delete_user(id) {
             document.getElementById("delete_id").value = id;
-            document.getElementById("delete_freelancer_form").submit();
+            document.getElementById("delete_user_form").submit();
         };
     </script>
 </body>

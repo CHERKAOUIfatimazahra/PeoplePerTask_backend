@@ -97,7 +97,7 @@ getAllFreelancer(); -->
                   <a class="dropdown-item" href="#">Account Setting</a>
                   <a
                     class="dropdown-item"
-                    href="/PeoplePerTask/project/pages/index.html"
+                    href="/PeoplePerTasks/project/pages/index.html"
                     >Log out</a
                   >
                 </div>

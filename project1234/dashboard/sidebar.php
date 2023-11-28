@@ -11,6 +11,9 @@
                 <a href="dashboard.php" class="sidebar_link"> <img src="img/1. overview.svg" alt="icon">statistics</a>
             </li>
             <li class="sidebar_item <?=$freelancer_active?>" style="width: 100%;">
+                <a href="users.php" class="sidebar_link"> <img src="img/agents.svg" alt="icon">users</a>
+            </li>
+            <li class="sidebar_item <?=$freelancer_active?>" style="width: 100%;">
                 <a href="freelancers.php" class="sidebar_link"> <img src="img/agents.svg" alt="icon">freelancer</a>
             </li>
             <li class="sidebar_item <?=$projects_active?>">
@@ -22,11 +25,6 @@
             <li class="sidebar_item <?=$Testimonial_active?>">
                 <a href="testimonial.php" class="sidebar_link"><img src="img/agent.svg" alt="icon">Testimonial</a>
             </li>
-
         </ul>
-        <div class="line"></div>
-        <a href="#" class="sidebar_link"><img src="img/settings.svg" alt="icon">Settings</a>
-
-
     </div>
 </aside>
