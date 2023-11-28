@@ -7,9 +7,9 @@
         </div>
 
         <ul class="sidebar_nav">
-            <li class="sidebar_item <?=$dashboard_active?>" style="width: 100%;">
+            <!-- <li class="sidebar_item <?=$dashboard_active?>" style="width: 100%;">
                 <a href="dashboard.php" class="sidebar_link"> <img src="img/1. overview.svg" alt="icon">statistics</a>
-            </li>
+            </li> -->
             <li class="sidebar_item <?=$freelancer_active?>" style="width: 100%;">
                 <a href="users.php" class="sidebar_link"> <img src="img/agents.svg" alt="icon">users</a>
             </li>

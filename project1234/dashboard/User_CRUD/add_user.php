@@ -1,7 +1,7 @@
 <?php
 require './../data_connection/database.php';
 
-$name = $_POST['UserName'];
+$name = $_POST['name'];
 $password = $_POST['Password'];
 $email = $_POST['email'];
 $info = $_POST['relevant_info'];
@@ -22,7 +22,7 @@ $res = mysqli_query($con, $insertFreelancerQuery);
 
 
 if ($res)
-    header("location: ./../freelancers.php");
+    header("location: ./../users.php");
 
 mysqli_close($con);
 ?>
