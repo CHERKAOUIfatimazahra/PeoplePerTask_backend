@@ -135,7 +135,7 @@ data-bs-target="#exampleModalCenter"></button>
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">Modify Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true"></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -173,7 +173,7 @@ data-bs-target="#exampleModalCenter"></button>
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">Freelancer modal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true"></span>
                     </button>
                 </div>
                 <div class="modal-body">

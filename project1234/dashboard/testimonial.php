@@ -131,7 +131,7 @@
                                 echo "<td>" . $row['Comment'] . "</td>";
                                 echo "<td>" . $row['UserName'] . "</td>";
                                 echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateTestimonial(' . $row['ID_Temoignage'] . ' , \''. $row['Comment'] .'\' , '. $row['UserID'] .')" >Modify</button> 
-                    <button type="button" onclick="delete_testimonial(' . $row['ID_Temoignage'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
+                                <button type="button" onclick="delete_testimonial(' . $row['ID_Temoignage'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                 echo "</tr>";
                             endwhile;
                         endif;
@@ -146,7 +146,7 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalCenterTitle">Freelancer modal</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="modal-body">
@@ -190,7 +190,7 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalCenterTitle">Testimonial modal</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true"></span>
                                 </button>
                             </div>
                             <div class="modal-body">
