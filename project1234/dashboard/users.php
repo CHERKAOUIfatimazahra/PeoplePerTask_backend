@@ -74,7 +74,7 @@
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Account Setting</a>
-                                <a class="dropdown-item" href="/PeoplePerTasks/project/pages/index.html">Log out</a>
+                                <a class="dropdown-item" href="index.php">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -93,6 +93,7 @@ data-bs-target="#exampleModalCenter"></button>
                             <th>User</th>
                             <th>Password</th>
                             <th>Email</th>
+                            <th>img</th>
                             <th>OtherRelevantInformation</th>
                             <th ></th>
                         </tr>
@@ -110,9 +111,10 @@ data-bs-target="#exampleModalCenter"></button>
                                     echo "<td>" . $row['UserName'] . "</td>";
                                     echo "<td>" . $row['Password'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
+                                    echo "<td>" . $row['user_img'] . "</td>";
                                     echo "<td>" . $row['OtherRelevantInformation'] . "</td>";
                                     // modefy delet
-                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' , \''. $row['OtherRelevantInformation'] .'\')" >Modify</button> 
+                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' ,\'' . $row['user_img'] .'\', \''. $row['OtherRelevantInformation'] .'\')" >Modify</button> 
                                     <button type="button" onclick="delete_user(' . $row['UserID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                     echo "</tr>";
                                 endwhile;
@@ -150,6 +152,13 @@ data-bs-target="#exampleModalCenter"></button>
                             <label for="update_email" class="col-form-label">Email</label>
                             <input type="text" class="update_email" name="update_email" id="update_email">
                         </div>
+                        <!-- img -->
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">add your image</label>
+                                <input type="file" name="update_img" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+                        </form>
                         <div class="mb-3">
                             <label for="update_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="update_info" id="update_info"></textarea>
@@ -180,13 +189,18 @@ data-bs-target="#exampleModalCenter"></button>
                             <input type="text" class="form-control" name="name" id="name">
                         </div>
                         <div class="mb-3">
-                            <label for="skills" class="col-form-label">Password</label>
+                            <label for="password" class="col-form-label">Password</label>
                             <input type="text" class="form-control" name="password" id="password">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
                             <input type="text" class="form-control" name="email" id="email">
                         </div>
+                        <!-- img -->
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">add your image</label>
+                                <input type="file" name="img" class="form-control-file" id="exampleFormControlFile1">
+                            </div>
                         <div class="mb-3">
                             <label for="relevant_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="relevant_info" id="relevant_info"></textarea>
@@ -220,20 +234,26 @@ data-bs-target="#exampleModalCenter"></button>
             document.getElementById("update_user_form").submit();
         }
 
-        function updateUser(id , UserName , Password, email , OtherRelevantInformation) {
+        function updateUser(id , UserName , Password, email , user_img, OtherRelevantInformation) {
             document.getElementById("update_id").value = id;
             document.getElementById("update_name").value = UserName;
             document.getElementById("update_password").value = Password;
             document.getElementById("update_email").value = email;
+            document.getElementById("update_img").value = user_img;
             document.getElementById("update_info").value = OtherRelevantInformation;
 
             document.getElementById('open_modal_button').click();
         };
 
         function delete_user(id) {
+        // confirmation deleting
+        const confirmed = confirm("Are you sure you want to delete this user?");
+        
+        if (confirmed) {
             document.getElementById("delete_id").value = id;
             document.getElementById("delete_user_form").submit();
-        };
+        }
+    };
     </script>
 </body>
 

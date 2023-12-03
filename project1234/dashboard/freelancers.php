@@ -74,7 +74,7 @@
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Account Setting</a>
-                                <a class="dropdown-item" href="/PeoplePerTasks/project/pages/index.html">Log out</a>
+                                <a class="dropdown-item" action ="freelancers.php" href="../index.php">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -232,11 +232,15 @@ data-bs-target="#exampleModalCenter"></button>
 
             document.getElementById('open_modal_button').click();
         };
-
         function delete_freelancer(id) {
+        // confirmation deleting
+        const confirmed = confirm("Are you sure you want to delete this freelancer?");
+        
+        if (confirmed) {
             document.getElementById("delete_id").value = id;
             document.getElementById("delete_freelancer_form").submit();
-        };
+        }
+    }
     </script>
 </body>
 

@@ -1,13 +1,14 @@
 <?php
 require './../data_connection/database.php';
 
-$name = $_POST['name'];
-$password = $_POST['Password'];
-$email = $_POST['email'];
-$info = $_POST['relevant_info'];
+$name = htmlspecialchars(trim($_POST['name']));
+$password = md5(trim($_POST['password']));
+$email = htmlspecialchars(trim($_POST['email']));
+$img = htmlspecialchars(trim($_POST['img']));
+$info = htmlspecialchars(trim($_POST['relevant_info']));
 
-$insertUserQuery = "INSERT INTO users (UserName, email ,OtherRelevantInformation) 
-VALUES ('$name', '$email' , '$info')";
+$insertUserQuery = "INSERT INTO users (UserName, Password, email, user_img,OtherRelevantInformation) 
+VALUES ('$name','$password', '$email' , '$img' , '$info')";
 
 
 mysqli_query($con, $insertUserQuery);

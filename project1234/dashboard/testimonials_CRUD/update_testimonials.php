@@ -1,9 +1,9 @@
 <?php
 
 require './../data_connection/database.php';
-$id = $_POST['update_id'];
-$comment = $_POST['update_Comment'];
-$userID = $_POST['update_UserID'];
+$id = htmlspecialchars(trim($_POST['update_id']));
+$comment = htmlspecialchars(trim($_POST['update_Comment']));
+$userID = htmlspecialchars(trim($_POST['update_UserID']));
 
 $updateQuery = "UPDATE Testimonials SET Comment = '$comment' , UserID = '$userID' WHERE ID_Temoignage = '$id'";
 

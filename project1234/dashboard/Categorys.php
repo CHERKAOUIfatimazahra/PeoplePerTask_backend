@@ -74,7 +74,7 @@
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Account Setting</a>
-                                <a class="dropdown-item" href="/PeoplePerTasks/project/pages/index.html">Log out</a>
+                                <a class="dropdown-item" href="index.php">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -90,13 +90,14 @@
                         <tr class="table-dark">
                             <th>ID</th>
                             <th>category</th>
+                            <th>img</th>
                             <th ></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                         require './data_connection/database.php';
-                        $query = "select c.CategoryName , c.Category_ID from categories c";
+                        $query = "select * from categories";
 
                         $res = mysqli_query($con, $query);
                         if (mysqli_num_rows($res) > 0):
@@ -104,6 +105,7 @@
                                 echo "<tr>";
                                 echo "<td>" . $row['Category_ID'] . "</td>";
                                 echo "<td>" . $row['CategoryName'] . "</td>";
+                                echo "<td>" . $row['category_img'] . "</td>";
                                 echo '<td><div style="display:flex;"><button type="button" onclick="delete_category(' . $row['Category_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                 echo "</tr>";
                             endwhile;
@@ -133,6 +135,11 @@
                             <label for="name" class="col-form-label">category</label>
                             <input type="text" class="form-control" name="name" id="name">
                         </div>
+                        <!-- img -->
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">add image</label>
+                            <input type="file" name="img" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -159,9 +166,14 @@
             document.getElementById("add_category_form").submit();
         }
         function delete_category(id) {
+            // confirmation deleting
+            const confirmed = confirm("Are you sure you want to delete this category?");
+        
+        if (confirmed) {
             document.getElementById("delete_id").value = id;
             document.getElementById("delete_category_form").submit();
         }
+        };
     </script>
 </body>
 

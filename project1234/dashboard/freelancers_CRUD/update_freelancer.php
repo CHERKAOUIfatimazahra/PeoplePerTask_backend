@@ -1,11 +1,11 @@
 <?php
 
 require './../data_connection/database.php';
-$id = $_POST['update_id'];
-$new_name = $_POST['update_name'];
-$new_skills = $_POST['update_skills'];
-$new_info = $_POST['update_info'];
-$new_email = $_POST['update_email'];
+$id = htmlspecialchars(trim($_POST['update_id']));
+$new_name = htmlspecialchars(trim($_POST['update_name']));
+$new_skills = htmlspecialchars(trim($_POST['update_skills']));
+$new_info = htmlspecialchars(trim($_POST['update_info']));
+$new_email = htmlspecialchars(trim($_POST['update_email']));
 
 $updateQuery = "UPDATE Freelancers SET SKILLS = '$new_skills' , NameFreelancer = '$new_name' WHERE Freelance_ID = '$id'";
 

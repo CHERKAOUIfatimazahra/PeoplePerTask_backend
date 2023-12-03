@@ -95,7 +95,7 @@
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">Account Setting</a>
-                                <a class="dropdown-item" href="/PeoplePerTasks/project/pages/index.html">Log out</a>
+                                <a class="dropdown-item" href="logout.php">Log out</a>
                             </div>
                         </li>
                     </ul>
@@ -233,7 +233,18 @@
         </div>
     </div>
 
-            
+<script>
+
+    function delete_testimonial(id) {
+        // confirmation deleting
+        const confirmed = confirm("Are you sure you want to delete this testimonial?");
+        
+        if (confirmed) {
+            document.getElementById("delete_id").value = id;
+            document.getElementById("delete_testimonial_form").submit();
+        }
+    }
+</script>        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>

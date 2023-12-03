@@ -1,10 +1,10 @@
 <?php
 require './../data_connection/database.php';
 
-$name = $_POST['name'];
-$skills = $_POST['skills'];
-$email = $_POST['email'];
-$info = $_POST['relevant_info'];
+$name = htmlspecialchars(trim($_POST['name']));
+$skills = htmlspecialchars(trim($_POST['skills']));
+$email = htmlspecialchars(trim($_POST['email']));
+$info = htmlspecialchars(trim($_POST['relevant_info']));
 
 $insertUserQuery = "INSERT INTO users (UserName, email ,OtherRelevantInformation) 
 VALUES ('$name', '$email' , '$info')";

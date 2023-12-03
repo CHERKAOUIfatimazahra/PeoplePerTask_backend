@@ -1,10 +1,10 @@
 <?php
 require './../data_connection/database.php';
 
-$title = $_POST['Project_Title'];
-$desc = $_POST['Descrip_project'];
-$cat_id = $_POST['Category_ID'];
-$sub_id = $_POST['sub_Category_ID'];
+$title = htmlspecialchars(trim($_POST['Project_Title']));
+$desc = htmlspecialchars(trim($_POST['Descrip_project']));
+$cat_id = htmlspecialchars(trim($_POST['Category_ID']));
+$sub_id = htmlspecialchars(trim($_POST['sub_Category_ID']));
 
 
 $insertUserQuery = "INSERT INTO Projects (Project_Title, Descrip_project, Category_ID, sub_Category_ID) 

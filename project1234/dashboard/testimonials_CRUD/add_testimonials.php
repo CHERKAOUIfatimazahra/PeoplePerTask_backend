@@ -1,8 +1,8 @@
 <?php
 require './../data_connection/database.php';
 
-$comment = $_POST['Comment'];
-$userId = $_POST['UserID'];
+$comment = htmlspecialchars(trim($_POST['Comment']));
+$userId = htmlspecialchars(trim($_POST['UserID']));
 
 $insertUserQuery = "INSERT INTO Testimonials (Comment, UserID) 
 VALUES ('$comment', '$userId')";

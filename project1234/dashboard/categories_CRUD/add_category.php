@@ -1,10 +1,11 @@
 <?php
 require './../data_connection/database.php';
 
-$name = $_POST['name'];
+$name = htmlspecialchars(trim($_POST['name']));
+$categ_img = htmlspecialchars(trim($_POST['img']));
 
-$insertCatQuery = "INSERT INTO categories (CategoryName) 
-VALUES ('$name')";
+$insertCatQuery = "INSERT INTO categories (CategoryName,category_img) 
+VALUES ('$name','$categ_img')";
 
 $res = mysqli_query($con, $insertCatQuery);
 
