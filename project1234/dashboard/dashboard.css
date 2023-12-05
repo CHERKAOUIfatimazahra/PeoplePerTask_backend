@@ -64,14 +64,14 @@ ul {
 }
 
 #sidebar {
-    position: sticky;
+
     top: 0;
     max-width: 16rem;
     min-width: 16rem;
-    max-height: 100vh;
+
     background: #363740;
     transition: all 0.35s ease-in-out;
-    overflow: hidden;
+
 }
 #sidebar.menu {
     width: 5rem !important;

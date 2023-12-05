@@ -25,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             mysqli_close($con);
       }
   }
-
 ?>;
 <?php
 require 'includes/header.php';
@@ -92,7 +91,6 @@ require 'includes/header.php';
 
                   </form>
 <!-- fin de forme d'enregistrement -->
-
                 </div>
               </div>
             </div>

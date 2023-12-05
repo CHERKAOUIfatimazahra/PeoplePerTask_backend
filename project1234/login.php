@@ -5,33 +5,48 @@ session_start();
 require 'dashboard/data_connection/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-  $email = htmlspecialchars(trim($_POST['email']));
-  $password = $_POST['password'];
-  
-  if (!empty($email) && !empty($password) ) {
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE email = '$email' limit 1";
-    $res = mysqli_query($con, $query);
+    if (!empty($email) && !empty($password)) {
 
-    if ($res) {
-      if ($res && mysqli_num_rows($res) > 0) {
+        $query = "SELECT * FROM users WHERE email = '$email' LIMIT 1";
+        $res = mysqli_query($con, $query);
 
-        $user_data = mysqli_fetch_assoc($res);
-        $stored_hashed_password = $user_data['Password'];
+        if ($res && mysqli_num_rows($res) > 0) {
 
-        if (password_verify($password, $stored_hashed_password)) {
-          $_SESSION['UserID'] = $user_data['UserID'];
-          header("Location: dashboard/freelancers.php");
-          die;
+            $user_data = mysqli_fetch_assoc($res);
+            $stored_hashed_password = $user_data['Password'];
+
+            if (password_verify($password, $stored_hashed_password)) {
+
+                // Admin role
+                if ($user_data['role'] == 'Admin') {
+                    $_SESSION['UserID'] = $user_data['UserID'];
+                    header("Location: dashboard/freelancers.php");
+                    die;
+                }
+                // Freelancer role
+                else if ($user_data['role'] == 'Freelancer') {
+                    $_SESSION['UserID'] = $user_data['UserID'];
+                    header("Location: dashboard/freelancers.php");
+                    die;
+                }
+                // Client role
+                else if ($user_data['role'] == 'Client') {
+                    $_SESSION['UserID'] = $user_data['UserID'];
+                    header("Location: client_page.php");
+                    die;
+                } 
+            } else {
+                echo "Wrong username or password!";
+            }
+        } else {
+            echo "Wrong username or password!";
         }
-
-      }
+    } else {
+        echo "Please provide both email and password!";
     }
-
-    echo "wrong username or password!";
-  } else {
-    echo "wrong username or password!";
-  }
 }
 
 ?>

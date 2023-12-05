@@ -161,9 +161,7 @@
        top: 30%;
        left: 80%;
  
-    }  
-    
-    
+    }   
  }
  @keyframes slide-animate2{
   25%{
@@ -197,12 +195,7 @@
      top: 90%;
      left: 20%;
   }  
-  
-  
 }
-
- 
-
 #setting-icon-animation{
   animation: rotate 5s ease-in-out  infinite;  
   animation-delay: 1s;
