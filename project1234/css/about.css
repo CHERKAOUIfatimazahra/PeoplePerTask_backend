@@ -111,9 +111,9 @@
 }
 .modal{     
    padding: 30px 50px;
-   width: 700px;
+   /* width: 700px; */
    border: #FFF;
-   box-shadow: 0 0 1em rgb(0, 0, .3);
+   /* box-shadow: 0 0 1em rgb(0, 0, .3); */
 }
 .read{
    width: 19rem;

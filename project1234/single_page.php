@@ -1,37 +1,38 @@
 <?php
 require 'includes/header.php';
+?>
+<?php
+  require 'dashboard/data_connection/database.php';
+   
 ?> 
-<div class="blog-single gray-bg">
+<?php 
+ if(isset($_GET['id'])){
+    $id_project=$_GET['id']; 
+     $query = "select * from projects WHERE Project_ID = $id_project;";
+        $res = mysqli_query($con, $query);
+          if (mysqli_num_rows($res) > 0) :
+
+
+?>
+    <div class="blog-single gray-bg">
+<?php if ($row = mysqli_fetch_assoc($res)) :?>
         <div class="container">
             <div class="row align-items-start">
                 <div class="col-lg-8 m-15px-tb">
                     <article class="article">
                         <div class="article-img">
+                            <!-- image project -->
                             <img src="https://www.bootdey.com/image/800x350/87CEFA/000000" title="" alt="">
                         </div>
                         <div class="article-title">
-                            <h2>They Now Bade Farewell To The Kind But Unseen People</h2>
-                            <div class="media">
-                                <div class="avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <label>Rachel Roth</label>
-                                    <span>26 FEB 2020</span>
-                                </div>
-                            </div>
+                            <h2><?php echo $row['Project_Title'];?></h2>
                         </div>
+                        <!-- description project -->
                         <div class="article-content">
-                            <p>Aenean eleifend ante maecenas pulvinar montes lorem et pede dis dolor pretium donec dictum. Vici consequat justo enim. Venenatis eget adipiscing luctus lorem. Adipiscing veni amet luctus enim sem libero tellus viverra venenatis aliquam. Commodo natoque quam pulvinar elit.</p>
-                            <p>Eget aenean tellus venenatis. Donec odio tempus. Felis arcu pretium metus nullam quam aenean sociis quis sem neque vici libero. Venenatis nullam fringilla pretium magnis aliquam nunc vulputate integer augue ultricies cras. Eget viverra feugiat cras ut. Sit natoque montes tempus ligula eget vitae pede rhoncus maecenas consectetuer commodo condimentum aenean.</p>
-                            <h4>What are my payment options?</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <blockquote>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                                <p class="blockquote-footer">Someone famous in <cite title="Source Title">Dick Grayson</cite></p>
-                            </blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <?php echo $row['Descrip_project'];?> 
                         </div>
+        
+                        <!-- Tags -->
                         <div class="nav tag-cloud">
                             <a href="#">Design</a>
                             <a href="#">Development</a>
@@ -42,7 +43,69 @@ require 'includes/header.php';
                             <a href="#">Managment</a>
                         </div>
                     </article>
+<!-- button for offers -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $amount = htmlspecialchars(trim($_POST['amount']));
+    $deadline = $_POST['deadline'];
+    $message = htmlspecialchars(trim($_POST['message']));
+
+    require 'dashboard/data_connection/database.php';
+
+    if (!empty($amount) && !empty($deadline)) {
+        $sql = "INSERT into offres (Amount, Deadline, message) values ('$amount','$deadline','$message')";
+        mysqli_query($con, $sql);
+        header("Location: single_page.php");
+        exit();
+    } else {
+        echo "Please enter some valid information!";
+    }
+    mysqli_close($con);
+}
+?>
+<button type="button" class="btn btn-primary me-2 sign-style-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tack to Project</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Offer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form id="add_offer_form" action="single_page.php" method="POST">
+          <div class="mb-3">
+            <div class="input-group mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="amount" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append" id="amount">
+                        <span class="input-group-text">$</span>
+                    </div>
                 </div>
+            </div>    
+            </div>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Deadline</label>
+                <input class="date form-control" id="deadline" name="deadline" />
+            </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label" name="message">Message</label>
+            <textarea class="date" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" onclick="add_offer()" class="btn btn-primary me-2 sign-style-color">add offer</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end button for offers -->
+</div>
+
+        <!-- clinet information -->
                 <div class="col-lg-4 m-15px-tb blog-aside">
                     <!-- Author -->
                     <div class="widget widget-author">
@@ -62,16 +125,7 @@ require 'includes/header.php';
                         </div>
                     </div>
                     <!-- End Author -->
-                    <!-- Trending Post -->
-                    <div class="widget widget-post">
-                        <div class="widget-title">
-                            <h3>Trending Now</h3>
-                        </div>
-                        <div class="widget-body">
-
-                        </div>
-                    </div>
-                    <!-- End Trending Post -->
+                    
                     <!-- Latest Post -->
                     <div class="widget widget-latest-post">
                         <div class="widget-title">
@@ -162,7 +216,12 @@ require 'includes/header.php';
                 </div>
             </div>
         </div>
+        <?php endif;?>
+        <?php endif;}?> 
     </div>
 <?php
+function add_offer() {
+    document.getElementById("add_offer_form").submit();
+}
 require 'includes/footer.php';
 ?>

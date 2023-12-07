@@ -53,67 +53,7 @@ require 'includes/header.php';
           <h3 class="h6 mb-4">Description</h3>
           <div class="mb-3">
             <label class="form-label">Address Line 1</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Address Line 2</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Country</label>
-                <select class="select2 form-control select2-hidden-accessible" data-select2-placeholder="Select country" data-select2-id="select2-data-1-gy14" tabindex="-1" aria-hidden="true">
-                  <option data-select2-id="select2-data-3-ibs9"></option>
-                  <option value="AF">Afghanistan</option>
-                  <option value="BS">Bahamas</option>
-                  <option value="KH">Cambodia</option>
-                  <option value="DK">Denmark</option>
-                  <option value="TL">East Timor</option>
-                  <option value="GM">Gambia</option>
-                </select><span class="select2 select2-container select2-container--bootstrap-5" dir="ltr" data-select2-id="select2-data-2-46y9" style="width: 391px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-vp8l-container" aria-controls="select2-vp8l-container"><span class="select2-selection__rendered" id="select2-vp8l-container" role="textbox" aria-readonly="true" title="Select country"><span class="select2-selection__placeholder">Select country</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">State</label>
-                <select class="select2 form-control select2-hidden-accessible" data-select2-placeholder="Select state" data-select2-id="select2-data-4-680y" tabindex="-1" aria-hidden="true">
-                  <option data-select2-id="select2-data-6-cshs"></option>
-                  <option value="AL">Alabama</option>
-                  <option value="CA">California</option>
-                  <option value="DE">Delaware</option>
-                  <option value="FL">Florida</option>
-                  <option value="GA">Georgia</option>
-                  <option value="HI">Hawaii</option>
-                  <option value="ID">Idaho</option>
-                  <option value="KS">Kansas</option>
-                </select><span class="select2 select2-container select2-container--bootstrap-5" dir="ltr" data-select2-id="select2-data-5-np4c" style="width: 391px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-2fn7-container" aria-controls="select2-2fn7-container"><span class="select2-selection__rendered" id="select2-2fn7-container" role="textbox" aria-readonly="true" title="Select state"><span class="select2-selection__placeholder">Select state</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">City</label>
-                <select class="select2 form-control select2-hidden-accessible" data-select2-placeholder="Select city" data-select2-id="select2-data-7-809c" tabindex="-1" aria-hidden="true">
-                  <option data-select2-id="select2-data-9-k35n"></option>
-                  <option value="b">Bangkok</option>
-                  <option value="d">Dubai</option>
-                  <option value="h">Hong Kong</option>
-                  <option value="k">Kuala Lumpur</option>
-                  <option value="l">London</option>
-                  <option value="n">New York City</option>
-                  <option value="m">Macau</option>
-                  <option value="p">Paris</option>
-                </select><span class="select2 select2-container select2-container--bootstrap-5" dir="ltr" data-select2-id="select2-data-8-3peu" style="width: 391px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-jdfi-container" aria-controls="select2-jdfi-container"><span class="select2-selection__rendered" id="select2-jdfi-container" role="textbox" aria-readonly="true" title="Select city"><span class="select2-selection__placeholder">Select city</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">ZIP code</label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
+            <textarea type="text" class="form-control"></textarea>
           </div>
         </div>
       </div>
@@ -142,13 +82,13 @@ require 'includes/header.php';
       <div class="card mb-4">
         <div class="card-body">
           <h3 class="h6">Tags</h3>
-          <textarea class="form-control" rows="3"></textarea>
+          <input class="form-control" rows="3"></input>
         </div>
       </div>
       <div class="card mb-4">
         <div class="card-body">
           <h3 class="h6">skills</h3>
-          <textarea class="form-control" rows="3"></textarea>
+          <input type="text" class="form-control" rows="3">
         </div>
       </div>
       <!-- Notification settings -->
@@ -158,6 +98,23 @@ require 'includes/header.php';
 
   </div>
 </section>
+<script src="https://cdn.tiny.cloud/1/tlgymkq3md5bwov6ep75enssajkvpyx2c8jtciik5vlkx4yr/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
 </div>
 
  <?php

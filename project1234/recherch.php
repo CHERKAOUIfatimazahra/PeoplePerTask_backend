@@ -217,25 +217,28 @@ require 'includes/header.php';
                 <div class="job-shortby ml-sm-auto d-flex align-items-center">
                 </div>
             </div>
+            
+<!-- projects -->
 <?php
   require 'dashboard/data_connection/database.php';
   $query = "select * from projects";
   
   $res = mysqli_query($con, $query);
   if (mysqli_num_rows($res) > 0) :
-  ?>
-  
+?>
             <div class="row">
-                <?php while ($row = mysqli_fetch_assoc($res)) :?>
+                <?php while ($row = mysqli_fetch_assoc($res)) :
+                    $id_project=$row['Project_ID'];
+                    ?>
                 <div class="col-sm-6 col-lg-4 mb-4">
                     <div class="candidate-list candidate-grid">
                         <div class="candidate-list-image">
-                            <a href="single_page.php"><img class="img-fluid" src="images/pro.jpeg" alt=""></a>
+                            <a href="single_page.php?id=<?=$id_project?>"><img class="img-fluid" src="images/pro.jpeg" alt=""></a>
                         </div>
                         <div class="candidate-list-details">
                             <div class="candidate-list-info">
                                 <div class="candidate-list-title">
-                                    <h5><a href="candidate-detail.html"><?php echo $row['Project_Title'];?></a></h5>
+                                    <h5><a href="single_page.php?id=<?=$id_project?>"><?php echo $row['Project_Title'];?></a></h5>
                                 </div>
                                 <div class="candidate-list-option">
                                     <ul class="list-unstyled">
@@ -245,8 +248,8 @@ require 'includes/header.php';
                                 </div>
                             </div>
                             <div class="candidate-list-favourite-time">
-                                <a class="candidate-list-favourite order-2" href="#"><i class="far fa-heart"></i></a>
-                                <span class="candidate-list-time order-1"><i class="far fa-clock pr-1"></i>1M ago</span>
+                                <a class="order-2 btn btn-primary me-2 sign-style-color" href="single_page.php?id=<?=$id_project?>" role="button">Hire</a>
+                                <span class="candidate-list-time order-1">50$</span>
                             </div>
                         </div>
                     </div>
