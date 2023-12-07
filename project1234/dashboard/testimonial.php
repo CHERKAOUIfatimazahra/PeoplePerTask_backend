@@ -1,4 +1,13 @@
+<?php
+session_start();
+include 'data_connection/database.php';
 
+if (!isset($_SESSION['UserID'])) {
+
+    header("Location: ../login.php");
+    exit();
+}
+?>
     <script>
         function add_testimonial() {
             document.getElementById("add_testimonial_form").submit();
@@ -41,25 +50,23 @@
                 <table id="example" class="table table-striped table-info" style="width:100%">
                     <thead>
                         <tr class="table-dark">
-                            <th>ID</th>
                             <th>Comment</th>
-                            <th>User name</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         require './data_connection/database.php';
-                        $query = "select t.ID_Temoignage , t.Comment, u.UserName , u.UserID from Testimonials t
-                                inner join users u on u.UserID = t.UserID";
+                        $userId = $_SESSION['UserID'];
+                        $query = "SELECT t.ID_Temoignage, t.Comment, u.UserName, u.UserID FROM Testimonials t
+                      INNER JOIN users u ON u.UserID = t.UserID
+                      WHERE u.UserID = $userId";
 
                         $res = mysqli_query($con, $query);
                         if (mysqli_num_rows($res) > 0):
                             while ($row = mysqli_fetch_assoc($res)):
                                 echo "<tr>";
-                                echo "<td>" . $row['ID_Temoignage'] . "</td>";
                                 echo "<td>" . $row['Comment'] . "</td>";
-                                echo "<td>" . $row['UserName'] . "</td>";
                                 echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateTestimonial(' . $row['ID_Temoignage'] . ' , \''. $row['Comment'] .'\' , '. $row['UserID'] .')" >Modify</button> 
                                 <button type="button" onclick="delete_testimonial(' . $row['ID_Temoignage'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                 echo "</tr>";
@@ -131,16 +138,15 @@
                                     </div>
                                     <input type="text" name="update_id" id="update_id" style="display:none;">
                                     <div class="mb-3">
-                                        <label for="update_UserID" class="col-form-label">User: </label>
                                         <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="update_UserID" id="update_UserID">
                                         <?php
                                         require './data_connection/database.php';
-                                        $query = "select u.UserID , u.UserName  from users u";
+                                        $query = "select u.UserID from users u";
 
                                         $res = mysqli_query($con, $query);
                                         if (mysqli_num_rows($res) > 0):
                                             while ($row = mysqli_fetch_assoc($res)):
-                                                echo '<option class="text-gray-500" value="' . $row['UserID'] . '">' . $row['UserName'] . '</option>';
+                                                echo '<option class="text-gray-500" value="' . $row['UserID'] . '"></option>';
                                             endwhile;
                                         endif;
                                         ?>

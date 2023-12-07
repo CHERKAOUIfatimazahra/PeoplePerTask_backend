@@ -1,25 +1,34 @@
+<?php
+session_start();
+include 'data_connection/database.php';
+
+if (!isset($_SESSION['UserID'])) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <body>
 <div class="wrapper">
-            <?php
-            require "sidebar.php";
-            ?>
-        <div class="main">
+    <?php
+    require "sidebar.php";
+    ?>
+    <div class="main">
         <?php
-            require 'navbar_dash.php';
-            ?> 
+        require 'navbar_dash.php';
+        ?> 
         <div class="main">
             <div class="container my-4 py-4">
                 <!-- Primary Button -->
+        <?php if( $_SESSION['role'] == 'Client'):?>
                 <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
                     data-bs-target="#exampleModalCenter"> ADD New PROJECT</button>
-                    <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
+                <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
                     data-bs-target="#exampleModalCenter3"></button> 
-
-                <table id="example" class="table table-striped  " style="width:100%">
+<?php endif;?>
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
-                            <th>ID</th>
-                            <th>Project Title</title></th>
+                            <th>Project Title</th>
                             <th>Description</th>
                             <th>category</th>
                             <th>sub category</th>
@@ -28,35 +37,38 @@
                     </thead>
                     <tbody>
                     <?php
-                            require './data_connection/database.php';
-                            $query = "select p.Project_ID ,  p.Project_Title,p.Descrip_project,c.CategoryName , c.Category_ID, sc.sub_Category_ID,sc.sub_category_Name  from Projects p
-                            join categories c on c.Category_ID = p.Category_ID
-                            join sub_Categories sc on sc.sub_Category_ID = p.sub_Category_ID ";
-
-                            $res = mysqli_query($con, $query);
-                            if (mysqli_num_rows($res) > 0) :
-                                while ($row = mysqli_fetch_assoc($res)) :
-                                    echo "<tr>";
-                                    echo "<td>" . $row['Project_ID'] . "</td>";
-                                    echo "<td>" . $row['Project_Title'] . "</td>";
-                                    echo "<td>" . $row['Descrip_project'] . "</td>";
-                                    echo "<td>" . $row['CategoryName'] . "</td>";
-                                    echo "<td>" . $row['sub_category_Name'] . "</td>";
-                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateProject(' . $row['Project_ID'] . ' , \''. $row['Project_Title'] .'\' , \''. $row['Descrip_project'] .'\' , '. $row['Category_ID'] .' , '. $row['sub_Category_ID'] .')" >Modify</button> 
+                        require './data_connection/database.php';
+                        
+                        $userId = $_SESSION['UserID'];
+                        
+                        $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name  
+                            FROM Projects p
+                            JOIN categories c ON c.Category_ID = p.Category_ID
+                            JOIN sub_Categories sc ON sc.sub_Category_ID = p.sub_Category_ID
+                            WHERE p.UserID = $userId"; 
+                        
+                        $res = mysqli_query($con, $query);
+                        
+                        if (mysqli_num_rows($res) > 0) :
+                            while ($row = mysqli_fetch_assoc($res)) :
+                                echo "<tr>";
+                                echo "<td>" . $row['Project_Title'] . "</td>";
+                                echo "<td>" . $row['Descrip_project'] . "</td>";
+                                echo "<td>" . $row['CategoryName'] . "</td>";
+                                echo "<td>" . $row['sub_category_Name'] . "</td>";
+                            if ( $_SESSION['role'] == 'Client'){
+                                echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateProject(' . $row['Project_ID'] . ' , \''. $row['Project_Title'] .'\' , \''. $row['Descrip_project'] .'\' , '. $row['Category_ID'] .' , '. $row['sub_Category_ID'] .')" >Modify</button> 
                                     <button type="button" onclick="delete_project(' . $row['Project_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
-                                    echo "</tr>";
-                                endwhile;
-                            endif;
-                        ?>
-                    </tbody>
+                            }
+                                echo "</tr>";
+                            endwhile;
+                        endif;
+                    ?>
                     </tbody>
                 </table>
-
             </div>
-
         </div>
     </div>
-
     <!-- Modal update -->
     <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

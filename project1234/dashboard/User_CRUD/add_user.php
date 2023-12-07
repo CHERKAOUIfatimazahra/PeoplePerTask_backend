@@ -6,9 +6,10 @@ $password = md5(trim($_POST['password']));
 $email = htmlspecialchars(trim($_POST['email']));
 $img = htmlspecialchars(trim($_POST['img']));
 $info = htmlspecialchars(trim($_POST['relevant_info']));
+$role = htmlspecialchars(trim($_POST['role']));
 
-$insertUserQuery = "INSERT INTO users (UserName, Password, email, user_img,OtherRelevantInformation) 
-VALUES ('$name','$password', '$email' , '$img' , '$info')";
+$insertUserQuery = "INSERT INTO users (UserName, Password, email, user_img,OtherRelevantInformation,role) 
+VALUES ('$name','$password', '$email' , '$img' , '$info', '$role')";
 
 
 mysqli_query($con, $insertUserQuery);
@@ -27,3 +28,4 @@ if ($res)
 
 mysqli_close($con);
 ?>
+

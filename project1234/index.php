@@ -65,7 +65,7 @@ require 'includes/header.php';
                     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                         <div class="card category-card-style my-2">
                             <div class="d-flex justify-content-center">
-                                <img src="<?php echo $row[' category_img']; ?>" alt="category">
+                                <img src="<?php echo $row['category_img']; ?>" alt="category">
                             </div>
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-semibold"><?php echo $row['CategoryName']; ?></h5>
@@ -568,7 +568,6 @@ require 'includes/header.php';
                       </div>
                       <div class="">
                         <h4 class="mb-0"><?php echo $row['UserName']; ?></h4>
-                        <p class="mb-0 fs-6"><?php echo $row['SKILLS']; ?></p>
                         <i class="fa-solid fa-quote-left fa-xl" style="color: #ff7300;"></i>
                         <p><?php echo $row['Comment']; ?></p>
                         <i class="fa-solid fa-quote-left fa-rotate-180 fa-xl" style="color: #ff7300;"></i>

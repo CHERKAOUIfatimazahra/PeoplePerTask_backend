@@ -1,12 +1,13 @@
-<!-- 
-$projects_active = "";
-$freelancer_active = "";
-$dashboard_active = "active";
-$categorys_active = "";
-$Testimonial_active = "";
-require "../../backend/freelancer_script.php";
-getAllFreelancer(); -->
-
+<?php
+session_start();
+include 'data_connection/database.php';
+// Check if the user is logged in
+if (!isset($_SESSION['UserID'])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <?php
 require 'navbar_dash.php';
 ?> 

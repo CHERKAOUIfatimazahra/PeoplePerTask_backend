@@ -23,19 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 // Admin role
                 if ($user_data['role'] == 'Admin') {
                     $_SESSION['UserID'] = $user_data['UserID'];
+                    $_SESSION['role'] = $user_data['role'];
                     header("Location: dashboard/freelancers.php");
                     die;
                 }
                 // Freelancer role
                 else if ($user_data['role'] == 'Freelancer') {
                     $_SESSION['UserID'] = $user_data['UserID'];
+                    $_SESSION['role'] = $user_data['role'];
                     header("Location: dashboard/freelancers.php");
                     die;
                 }
                 // Client role
                 else if ($user_data['role'] == 'Client') {
                     $_SESSION['UserID'] = $user_data['UserID'];
-                    header("Location: client_page.php");
+                    $_SESSION['role'] = $user_data['role'];
+                    header("Location: dashboard/projects.php");
                     die;
                 } 
             } else {

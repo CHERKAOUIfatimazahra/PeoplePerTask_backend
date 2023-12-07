@@ -1,9 +1,8 @@
 <?php
-session_start();
 include 'data_connection/database.php';
 
 $email = ($_SESSION['UserID']);
-$sql = "SELECT UserName FROM users;";
+$sql = "SELECT UserName FROM users where UserID = $email";
 $result = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_assoc($result);
@@ -77,9 +76,9 @@ $userName = $row['UserName'];
                                 <img src="#" alt="icon">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
-                                <a class="dropdown-item" href="client_page.php">Profile</a>
-                                <a class="dropdown-item" href="#">Account Setting</a>
-                                <a class="dropdown-item" href="index.php">Log out</a>
+                                <a class="dropdown-item" href="../client_page.php">Profile</a>
+                                <a class="dropdown-item" href="../project_client.php">Add project</a>
+                                <a class="dropdown-item" href="../logout.php">Log out</a>
                             </div>
                         </li>
                     </ul>

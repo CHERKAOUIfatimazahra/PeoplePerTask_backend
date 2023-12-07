@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="./css/about.css">
   <link rel="stylesheet" href="./css/signup.css">
+  <link rel="stylesheet" href="./css/marketplace.css">
+  <link rel="stylesheet" href="./css/project_clinet.css">
+  <link rel="stylesheet" href="./css/single_page.css">
   <!-- animation links -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- link for icons -->
@@ -21,7 +24,7 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-postion">
+ <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-postion">
     <div class="container">
       <a class="navbar-brand" href="#"><img src="images/M.png" alt="logo"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -43,10 +46,18 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               category
             </a>
+<?php
+  require 'dashboard/data_connection/database.php';
+  $query = "select CategoryName from categories";
+  
+  $res = mysqli_query($con, $query);
+  if (mysqli_num_rows($res) > 0) :
+  ?>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="recherch.html">Ui/Ux</a></li>
+              <li><?php while ($row = mysqli_fetch_assoc($res)) :?><a class="dropdown-item" href="recherch.php"><?php echo $row['CategoryName'];?></a><?php endwhile;?></li>
             </ul>
           </li>
+          <?php endif;?>
           <li class="nav-item">
             <a class="nav-link" href="contact.php">Contact</a>
           </li>
@@ -59,8 +70,13 @@
             <img src="images/searchicon.svg" alt="">
           </span>
         </form>
+<?php if (!isset($_SESSION['UserID'])):?>
         <a class="btn btn-primary me-2 sign-style-color" href="regester.php" role="button">Sign up</a>
         <a class="btn btn-primary me-2 sign-style-color" href="login.php" role="button">Sign in</a>
+<?php endif;?>
+<?php if (isset($_SESSION['UserID'])):?>
+  <a class="btn btn-primary me-2 sign-style-color" href="logout.php" role="button">Logout</a>   
+<?php endif;?>   
       </div>
     </div>
   </nav>

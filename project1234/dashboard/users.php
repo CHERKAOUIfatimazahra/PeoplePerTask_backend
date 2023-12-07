@@ -1,3 +1,14 @@
+<?php
+session_start();
+include 'data_connection/database.php';
+// Check if the user is logged in
+if (!isset($_SESSION['UserID'])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+?>
 <body>
     <div class="wrapper">
             <?php
@@ -16,12 +27,11 @@ data-bs-target="#exampleModalCenter"></button>
                 <table id="example" class="table table-striped table-info" style="width:100%">
                     <thead>
                         <tr class="table-dark">
-                            <th>ID</th>
                             <th>User</th>
-                            <th>Password</th>
                             <th>Email</th>
                             <th>img</th>
                             <th>OtherRelevantInformation</th>
+                            <th>Role</th>
                             <th ></th>
                         </tr>
                     </thead>
@@ -34,14 +44,13 @@ data-bs-target="#exampleModalCenter"></button>
                             if (mysqli_num_rows($res) > 0) :
                                 while ($row = mysqli_fetch_assoc($res)) :
                                     echo "<tr>";
-                                    echo "<td>" . $row['UserID'] . "</td>";
                                     echo "<td>" . $row['UserName'] . "</td>";
-                                    echo "<td>" . $row['Password'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
                                     echo "<td>" . $row['user_img'] . "</td>";
                                     echo "<td>" . $row['OtherRelevantInformation'] . "</td>";
+                                    echo "<td>" . $row['role'] . "</td>";
                                     // modefy delet
-                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' ,\'' . $row['user_img'] .'\', \''. $row['OtherRelevantInformation'] .'\')" >Modify</button> 
+                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' ,\'' . $row['user_img'] .'\', \''. $row['OtherRelevantInformation'] .'\', \''. $row['role'] .'\')" >Modify</button> 
                                     <button type="button" onclick="delete_user(' . $row['UserID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                     echo "</tr>";
                                 endwhile;
@@ -90,6 +99,11 @@ data-bs-target="#exampleModalCenter"></button>
                             <label for="update_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="update_info" id="update_info"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="update_role" class="col-form-label">Role</label>
+                            <textarea class="form-control" name="update_role" id="update_info"></textarea>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -131,6 +145,10 @@ data-bs-target="#exampleModalCenter"></button>
                         <div class="mb-3">
                             <label for="relevant_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="relevant_info" id="relevant_info"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="col-form-label">Role</label>
+                            <textarea class="form-control" name="role" id="role"></textarea>
                         </div>
                     </form>
                 </div>
