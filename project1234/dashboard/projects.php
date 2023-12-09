@@ -56,6 +56,7 @@ if (!isset($_SESSION['UserID'])) {
                                 echo "<td>" . $row['Descrip_project'] . "</td>";
                                 echo "<td>" . $row['CategoryName'] . "</td>";
                                 echo "<td>" . $row['sub_category_Name'] . "</td>";
+                                echo "<td>" . $row['skill'] . "</td>";
                             if ( $_SESSION['role'] == 'Client'){
                                 echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateProject(' . $row['Project_ID'] . ' , \''. $row['Project_Title'] .'\' , \''. $row['Descrip_project'] .'\' , '. $row['Category_ID'] .' , '. $row['sub_Category_ID'] .')" >Modify</button> 
                                     <button type="button" onclick="delete_project(' . $row['Project_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
@@ -168,6 +169,21 @@ if (!isset($_SESSION['UserID'])) {
                             </select>
                         </div>
                             <div class="mb-3">
+                            <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="update_sub_Category_ID" id="update_sub_Category_ID">
+                            <?php
+                                require './data_connection/database.php';
+                                $query = "select sc.sub_Category_ID , sc.sub_category_Name  from sub_Categories sc";
+
+                                $res = mysqli_query($con, $query);
+                                if (mysqli_num_rows($res) > 0) :
+                                    while ($row = mysqli_fetch_assoc($res)) :
+                                        echo '<option class="text-gray-500" value="' . $row['sub_Category_ID'] . '">'. $row['sub_category_Name']  .'</option>';
+                                    endwhile;
+                                endif;
+                            ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="update_sub_Category_ID" id="update_sub_Category_ID">
                             <?php
                                 require './data_connection/database.php';

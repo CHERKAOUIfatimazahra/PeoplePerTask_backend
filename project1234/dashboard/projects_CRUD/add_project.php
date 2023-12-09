@@ -13,7 +13,6 @@ $cat_id = htmlspecialchars(trim($_POST['Category_ID']));
 $sub_id = htmlspecialchars(trim($_POST['sub_Category_ID']));
 $userID = $_SESSION['UserID'];
 
-$userID = $_SESSION['UserID'];
 $insertUserQuery = "INSERT INTO Projects (Project_Title, Descrip_project, Category_ID, sub_Category_ID,UserID) 
 VALUES (?, ?, ?, ?, ?)";
 

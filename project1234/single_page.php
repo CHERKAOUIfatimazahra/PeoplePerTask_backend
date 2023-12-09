@@ -1,18 +1,37 @@
+<?php 
+session_start();
+  require 'dashboard/data_connection/database.php';
+?> 
+<?php
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $amount = htmlspecialchars(trim($_POST['amount']));
+    $deadline = $_POST['deadline'];
+    $message = htmlspecialchars(trim($_POST['message']));
+    $Project_ID = $_GET['id'];	
+    $Freelance_ID = $_SESSION['UserID'];
+    
+    if (!empty($amount) && !empty($deadline)&& !empty($message)) {
+
+        $sql = "INSERT into offres (Amount, Deadline, message, Project_ID, UserID) values ('$amount','$deadline','$message','$Project_ID','$Freelance_ID')";
+        mysqli_query($con, $sql);
+
+        header("Location: recherch.php");
+        exit();
+    } else {
+        echo "Please enter some valid information!";
+    }
+    mysqli_close($con);
+}
+?>
 <?php
 require 'includes/header.php';
 ?>
-<?php
-  require 'dashboard/data_connection/database.php';
-   
-?> 
 <?php 
  if(isset($_GET['id'])){
     $id_project=$_GET['id']; 
      $query = "select * from projects WHERE Project_ID = $id_project;";
         $res = mysqli_query($con, $query);
           if (mysqli_num_rows($res) > 0) :
-
-
 ?>
     <div class="blog-single gray-bg">
 <?php if ($row = mysqli_fetch_assoc($res)) :?>
@@ -44,25 +63,7 @@ require 'includes/header.php';
                         </div>
                     </article>
 <!-- button for offers -->
-<?php
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $amount = htmlspecialchars(trim($_POST['amount']));
-    $deadline = $_POST['deadline'];
-    $message = htmlspecialchars(trim($_POST['message']));
 
-    require 'dashboard/data_connection/database.php';
-
-    if (!empty($amount) && !empty($deadline)) {
-        $sql = "INSERT into offres (Amount, Deadline, message) values ('$amount','$deadline','$message')";
-        mysqli_query($con, $sql);
-        header("Location: single_page.php");
-        exit();
-    } else {
-        echo "Please enter some valid information!";
-    }
-    mysqli_close($con);
-}
-?>
 <button type="button" class="btn btn-primary me-2 sign-style-color" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tack to Project</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       </div>
       <div class="modal-body">
 
-        <form id="add_offer_form" action="single_page.php" method="POST">
+        <form id="add_offer_form" action="single_page.php?id=<?=$id_project?>" method="POST">
           <div class="mb-3">
             <div class="input-group mb-3">
                 <div class="input-group">
@@ -87,17 +88,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Deadline</label>
-                <input class="date form-control" id="deadline" name="deadline" />
+                <input type="date" class="date form-control" id="deadline" name="deadline" />
             </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label" name="message">Message</label>
-            <textarea class="date" id="message-text"></textarea>
+            <textarea class="text" id="message" name="message"></textarea>
           </div>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" onclick="add_offer()" class="btn btn-primary me-2 sign-style-color">add offer</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" onclick="add_offer()" class="btn btn-primary me-2 sign-style-color">add offer</button>
+
       </div>
     </div>
   </div>

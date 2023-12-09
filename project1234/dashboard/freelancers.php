@@ -24,7 +24,7 @@ if (!isset($_SESSION['UserID'])) {
                                data-bs-target="#exampleModalCenter1"> ADD freelancer</button>
 <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
 data-bs-target="#exampleModalCenter"></button> 
-                <table id="example" class="table table-striped table-info" style="width:100%">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
                             <th>ID</th>

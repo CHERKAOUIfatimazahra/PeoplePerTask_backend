@@ -76,7 +76,7 @@ $userName = $row['UserName'];
                                 <img src="#" alt="icon">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
-                                <a class="dropdown-item" href="../client_page.php">Profile</a>
+                                <a class="dropdown-item" href="../profil.php">Profile</a>
                                 <a class="dropdown-item" href="../project_client.php">Add project</a>
                                 <a class="dropdown-item" href="../logout.php">Log out</a>
                             </div>

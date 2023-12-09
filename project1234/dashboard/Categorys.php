@@ -1,9 +1,9 @@
 <?php
 session_start();
 include 'data_connection/database.php';
-// Check if the user is logged in
+
 if (!isset($_SESSION['UserID'])) {
-    // Redirect to the login page if not logged in
+    
     header("Location: ../login.php");
     exit();
 }
@@ -23,10 +23,9 @@ if (!isset($_SESSION['UserID'])) {
     <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
         data-bs-target="#modalAdd"> ADD New Category</button>
 
-                <table id="example" class="table table-striped table-info" style="width:100%">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
-                            <th>ID</th>
                             <th>category</th>
                             <th>img</th>
                             <th ></th>
@@ -41,7 +40,6 @@ if (!isset($_SESSION['UserID'])) {
                         if (mysqli_num_rows($res) > 0):
                             while ($row = mysqli_fetch_assoc($res)):
                                 echo "<tr>";
-                                echo "<td>" . $row['Category_ID'] . "</td>";
                                 echo "<td>" . $row['CategoryName'] . "</td>";
                                 echo "<td>" . $row['category_img'] . "</td>";
                                 echo '<td><div style="display:flex;"><button type="button" onclick="delete_category(' . $row['Category_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';

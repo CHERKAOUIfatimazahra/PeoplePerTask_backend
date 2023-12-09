@@ -1,9 +1,9 @@
 <?php
 session_start();
 include 'data_connection/database.php';
-// Check if the user is logged in
+
 if (!isset($_SESSION['UserID'])) {
-    // Redirect to the login page if not logged in
+    
     header("Location: ../login.php");
     exit();
 }
@@ -24,7 +24,7 @@ if (!isset($_SESSION['UserID'])) {
                                data-bs-target="#exampleModalCenter1"> ADD user</button>
 <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
 data-bs-target="#exampleModalCenter"></button> 
-                <table id="example" class="table table-striped table-info" style="width:100%">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
                             <th>User</th>
@@ -81,7 +81,8 @@ data-bs-target="#exampleModalCenter"></button>
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Password:</label>
-                            <textarea class="form-control" name="update_password" id="update_password"></textarea>
+                            <input class="form-control" name="update_password" id="update_password">
+                            </input>
                         </div>
                         <input type="text" name="update_id" id="update_id" style="display:none;">
                         <div class="mb-3">
@@ -101,7 +102,18 @@ data-bs-target="#exampleModalCenter"></button>
                         </div>
                         <div class="mb-3">
                             <label for="update_role" class="col-form-label">Role</label>
-                            <textarea class="form-control" name="update_role" id="update_info"></textarea>
+                            <select class="form-control" name="update_role" id="update_role"><?php
+                                require './data_connection/database.php';
+                                $query = "select role from users";
+
+                                $res = mysqli_query($con, $query);
+                                if (mysqli_num_rows($res) > 0) :
+                                    while ($row = mysqli_fetch_assoc($res)) :
+                                        echo '<option class="text-gray-500" value="' . $row['role'] . ';"></option>';
+                                    endwhile;
+                                endif;
+                            ?>
+                            </select>
                         </div>
 
                     </form>

@@ -47,7 +47,7 @@ if (!isset($_SESSION['UserID'])) {
 
                 <button style="display:none;" type="button" id="open_modal_button" class="btn btn-success"
                     data-bs-toggle="modal" data-bs-target="#modalUpdate"></button>
-                <table id="example" class="table table-striped table-info" style="width:100%">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
                             <th>Comment</th>
@@ -96,17 +96,7 @@ if (!isset($_SESSION['UserID'])) {
                                     <div class="mb-3">
                                         <label for="UserID" class="col-form-label">User: </label>
                                         <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="UserID" id="UserID">
-                                            <?php
-                                            require './data_connection/database.php';
-                                            $query = "select u.UserID , u.UserName  from users u";
-
-                                            $res = mysqli_query($con, $query);
-                                            if (mysqli_num_rows($res) > 0):
-                                                while ($row = mysqli_fetch_assoc($res)):
-                                                    echo '<option class="text-gray-500" value="' . $row['UserID'] . '">' . $row['UserName'] . '</option>';
-                                                endwhile;
-                                            endif;
-                                            ?>
+                                            
                                         </select>
                                     </div>
                                 </form>
@@ -139,17 +129,6 @@ if (!isset($_SESSION['UserID'])) {
                                     <input type="text" name="update_id" id="update_id" style="display:none;">
                                     <div class="mb-3">
                                         <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="update_UserID" id="update_UserID">
-                                        <?php
-                                        require './data_connection/database.php';
-                                        $query = "select u.UserID from users u";
-
-                                        $res = mysqli_query($con, $query);
-                                        if (mysqli_num_rows($res) > 0):
-                                            while ($row = mysqli_fetch_assoc($res)):
-                                                echo '<option class="text-gray-500" value="' . $row['UserID'] . '"></option>';
-                                            endwhile;
-                                        endif;
-                                        ?>
                                         </select>
                                     </div>
                                 </form>
