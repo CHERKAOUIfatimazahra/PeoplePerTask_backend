@@ -7,13 +7,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         $email = htmlspecialchars(trim($_POST['email']));
         $password = password_hash(mysqli_real_escape_string($con, $_POST['password']),PASSWORD_DEFAULT);
         $conf_password = $_POST['cpassword'];
+        $img = $_POST['user_img'];
 
         if(!empty($name) && !empty($email) && !empty($password)&& !empty($conf_password)){
 
           if($_POST['password'] == $conf_password){
 
-            $sql = "INSERT into users (UserName, email, Password) values 
-            ('$name','$email','$password');";
+            $sql = "INSERT into users (UserName, email, Password, user_img) values 
+            ('$name','$email','$password','$img');";
 
               mysqli_query($con, $sql);
             
@@ -57,7 +58,6 @@ require 'includes/header.php';
 
 <!-- forme d'enregistrement -->
                   <form id="regester-form" action="regester.php" method="POST">
-
                     <div class="form-outline mb-3">
                       <label class="form-label" for="form3Example1cg">Your Name</label>
                       <input type="text" id="name_inp" name="name" class="form-control form-control-lg"/>
@@ -79,6 +79,14 @@ require 'includes/header.php';
                       <input type="password" id="password_rep_inp" name="cpassword" class="form-control form-control-lg"/>
                       <span id="password_rep_err" class="text text-danger"></span>
                     </div>
+
+                    <!-- img -->
+
+                      <div class="form-group">
+                        <label for="update_img">Add your image</label>
+                        <input type="file" name="user_img" class="form-control-file" id="user_img">
+                      </div>
+                   
 
                     <button type="submit" class="mrgntop btn btn-primary primary-btn-orange">
                       Register

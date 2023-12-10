@@ -80,12 +80,18 @@ require 'includes/header.php';
           ?>    
   </section>
     <!-- famous freelancers -->
-    <section class="section-famous-freelancers my-4 py-4">
-      <div class="container position-relative" >
-        <img src="./images/Circle2.svg"  id="circles-animation1" alt="flower" class=" position-absolute end-0 bottom-0 ">
-        <img src="./images/Circle2.svg" id="circles-animation2" alt="flower" class=" position-absolute end-0 bottom-10 ">
-        <img src="./images/Circle4.svg" id="circles-animation3" alt="flower" class=" position-absolute end-0 top-10 ">
-        <img src="./images/Circle4.svg" id="circles-animation4" alt="flower" class=" position-absolute end-100 top-10 ">
+  <section class="section-famous-freelancers my-4 py-4">
+  <?php
+  require 'dashboard/data_connection/database.php';
+    $query = "select * from users;";
+        $res = mysqli_query($con, $query);
+          if (mysqli_num_rows($res) > 0) :
+?>
+    <div class="container position-relative" >
+      <img src="./images/Circle2.svg"  id="circles-animation1" alt="flower" class=" position-absolute end-0 bottom-0 ">
+      <img src="./images/Circle2.svg" id="circles-animation2" alt="flower" class=" position-absolute end-0 bottom-10 ">
+      <img src="./images/Circle4.svg" id="circles-animation3" alt="flower" class=" position-absolute end-0 top-10 ">
+      <img src="./images/Circle4.svg" id="circles-animation4" alt="flower" class=" position-absolute end-100 top-10 ">
         <div class="row z-index-modifier">
           <div class="col-12">
             <div class="row text-center justify-content-center" >
@@ -98,12 +104,14 @@ require 'includes/header.php';
           </div>
         </div>
         <div class="row z-index-modifier">
+          <?php while ($row = mysqli_fetch_assoc($res)) :?>
           <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center ">
+
             <div class="card" style="max-width: 23rem;">
-              <img class="my-2 " src="images/fatiphoto.svg" alt="lahcen" style="height: 9rem; ">
+              <img class="my-2 " src="<?php echo $row['user_img']; ?>" alt="user_img" style="height: 9rem; ">
               <div class="card-body " >
                 <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">Fati</h5>
+                  <h5 class="card-title fw-semibold text-center"><?php echo $row['UserName']; ?></h5>
                 </div>
   
                   <p class="text-center ">full-Stack Developer</p> 
@@ -115,413 +123,24 @@ require 'includes/header.php';
                     <img src="images/Star_lightimpty.svg" alt="">
                   </div>
                   
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
+                  <p class="card-text text-center"><?php echo $row['OtherRelevantInformation']; ?></p>
                     <div class="hero-button d-flex justify-content-center my-2">
                       <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
                     </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">50$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center ">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 " src="images/lahcenphoto.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">lahcen</h5>
-                </div>
-  
-                  <p class="text-center ">UX/UI Designer</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    
                   </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">700$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center ">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/gara.svg" alt="gara" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">khalid gara</h5>
-                </div>
-  
-                  <p class="text-center ">Video Editing</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_lightimpty.svg" alt="">
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">11-11-2023</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">87$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
+              </div> 
             </div>
           </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display"  style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/nan.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">nana late</h5>
-                </div>
-  
-                  <p class="text-center ">Song Writer</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_lightimpty.svg" alt="">
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">5$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display" style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/dad.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">Sand john</h5>
-                </div>
-  
-                  <p class="text-center ">Beat Maker</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">HipHop-Dj-beat-grandM</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">57</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-02-2016</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">800$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display" style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/nanana.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">kaylie sffa</h5>
-                </div>
-  
-                  <p class="text-center ">Advertising</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_lightimpty.svg" alt="">
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">72$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display"  style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/othmanphoto.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">othman</h5>
-                </div>
-  
-                  <p class="text-center ">Song Writer</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_lightimpty.svg" alt="">
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">5$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display" style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/kala.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">Grand-M</h5>
-                </div>
-  
-                  <p class="text-center ">Beat Maker</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">HipHop-Dj-beat-grandM</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">57</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-02-2016</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">800$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-          <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center freelancer-card-display" style="display: none !important;">
-            <div class="card" style="max-width: 23rem;">
-              <img class="my-2 position-relative" src="images/ouissal.svg" alt="lahcen" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center">Ouissal</h5>
-                </div>
-  
-                  <p class="text-center ">Advertising</p> 
-                  <div class="d-flex align-items-center justify-content-center">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_light.svg" alt="star for reviews">
-                    <img src="images/Star_lightimpty.svg" alt="">
-                  </div>
-                  
-                  <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
-                    <div class="card-footer my-2">
-                      <span class="text-body-secondary my-2">UX-UI-Designer-adobe-figma</span>
-                      <div>
-                        <div class="row project-num my-2 d-flex justify-content-between">
-                          <div class="col-3  ">
-                            <span class="row">Project</span>
-                            <span class="row">5457</span>
-                          </div>
-                          <div class="col-6">
-                            <span class="row">Member since</span>
-                            <span class="row">01-11-2020</span>
-                          </div>
-                          <div class="col-3">
-                            <span class="row fw-bold fs-4" style="color: green;">72$</span>
-                          </div>
-  
-  
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            </div>
-  
-          </div>
-
-        </div>
+          <?php endwhile;?>
         <div  class="row">
           <div class="col-12 d-flex justify-content-center">
             <button id="loadmore" class="btn btn-primary primary-btn-orange">Load More</button>
           </div>
         </div>
       </div>
-  
+      <?php
+            endif;
+          ?> 
     </section>
   <!-- Testimonials section -->
   <section id="testimonials-key" class="Testimonials my-4 py-4">

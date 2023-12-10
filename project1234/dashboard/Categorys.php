@@ -26,8 +26,8 @@ if (!isset($_SESSION['UserID'])) {
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
-                            <th>category</th>
                             <th>img</th>
+                            <th>category</th>
                             <th ></th>
                         </tr>
                     </thead>
@@ -40,9 +40,9 @@ if (!isset($_SESSION['UserID'])) {
                         if (mysqli_num_rows($res) > 0):
                             while ($row = mysqli_fetch_assoc($res)):
                                 echo "<tr>";
-                                echo "<td>" . $row['CategoryName'] . "</td>";
                                 echo "<td>" . $row['category_img'] . "</td>";
-                                echo '<td><div style="display:flex;"><button type="button" onclick="delete_category(' . $row['Category_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
+                                echo "<td>" . $row['CategoryName'] . "</td>";
+                                echo '<td><div style="display:flex;"><button type="button" onclick="delete_category(' . $row['Category_ID'] . ')" class="btn btn-danger mx-2">Delete</button>';
                                 echo "</tr>";
                             endwhile;
                         endif;

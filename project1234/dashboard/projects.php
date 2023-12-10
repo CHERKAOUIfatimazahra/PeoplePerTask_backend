@@ -33,12 +33,20 @@ if (!isset($_SESSION['UserID'])) {
                             <th>category</th>
                             <th>sub category</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                         require './data_connection/database.php';
-                        
+                        if ($_SESSION['role'] == 'Admin'){
+                            $userId = $_SESSION['UserID'];
+                            $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name  
+                            FROM Projects p
+                            JOIN categories c ON c.Category_ID = p.Category_ID
+                            JOIN sub_Categories sc ON sc.sub_Category_ID = p.sub_Category_ID"; 
+                        }
+                        else{
                         $userId = $_SESSION['UserID'];
                         
                         $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name  
@@ -46,7 +54,7 @@ if (!isset($_SESSION['UserID'])) {
                             JOIN categories c ON c.Category_ID = p.Category_ID
                             JOIN sub_Categories sc ON sc.sub_Category_ID = p.sub_Category_ID
                             WHERE p.UserID = $userId"; 
-                        
+                        }
                         $res = mysqli_query($con, $query);
                         
                         if (mysqli_num_rows($res) > 0) :
@@ -56,10 +64,12 @@ if (!isset($_SESSION['UserID'])) {
                                 echo "<td>" . $row['Descrip_project'] . "</td>";
                                 echo "<td>" . $row['CategoryName'] . "</td>";
                                 echo "<td>" . $row['sub_category_Name'] . "</td>";
-                                echo "<td>" . $row['skill'] . "</td>";
+
                             if ( $_SESSION['role'] == 'Client'){
-                                echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateProject(' . $row['Project_ID'] . ' , \''. $row['Project_Title'] .'\' , \''. $row['Descrip_project'] .'\' , '. $row['Category_ID'] .' , '. $row['sub_Category_ID'] .')" >Modify</button> 
-                                    <button type="button" onclick="delete_project(' . $row['Project_ID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
+                                echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateProject(' . $row['Project_ID'] . ' , \''. $row['Project_Title'] .'\' , \''. $row['Descrip_project'] .'\' , '. $row['Category_ID'] .' , '. $row['sub_Category_ID'] .')" >Modify</button>'; 
+                            }
+                            if ( $_SESSION['role'] == 'Client' || $_SESSION['role'] == 'Admin'){    
+                                echo '<td><div style="display:flex;"><button type="button" onclick="delete_project(' . $row['Project_ID'] . ')" class="btn btn-danger mx-2">Delete</button>';
                             }
                                 echo "</tr>";
                             endwhile;
@@ -247,6 +257,24 @@ if (!isset($_SESSION['UserID'])) {
         }
         };
     </script>
+  <script src="https://cdn.tiny.cloud/1/tlgymkq3md5bwov6ep75enssajkvpyx2c8jtciik5vlkx4yr/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
+</div>
 </body>
 
 </html>

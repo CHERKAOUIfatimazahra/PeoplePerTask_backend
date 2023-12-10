@@ -1,4 +1,8 @@
+<?php
+session_start();
+include 'dashboard/data_connection/database.php';
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,12 +74,20 @@
             <img src="images/searchicon.svg" alt="">
           </span>
         </form>
-<?php if (!isset($_SESSION['UserID'])):?>
-        <a class="btn btn-primary me-2 sign-style-color" href="regester.php" role="button">Sign up</a>
-        <a class="btn btn-primary me-2 sign-style-color" href="login.php" role="button">Sign in</a>
-<?php endif;?>
 <?php if (isset($_SESSION['UserID'])):?>
-  <a class="btn btn-primary me-2 sign-style-color" href="logout.php" role="button">Logout</a>   
+  <a href="#" class="nav-icon pe-md-0 position-relative" data-bs-toggle="dropdown">
+                                <!-- user img -->
+                                <img src="#" alt="icon">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end position-absolute">
+                                <a class="dropdown-item" href="index.php">Home</a>
+                                <a class="dropdown-item" href="profil.php">Profile</a>
+                                <a class="dropdown-item" href="project_client.php">Add project</a>
+                                <a class="dropdown-item" href="logout.php">Log out</a>
+                            </div>  
+<?php else: ?>
+      <a class="btn btn-primary me-2 sign-style-color" href="regester.php" role="button">Sign up</a>
+      <a class="btn btn-primary me-2 sign-style-color" href="login.php" role="button">Sign in</a>
 <?php endif;?>   
       </div>
     </div>

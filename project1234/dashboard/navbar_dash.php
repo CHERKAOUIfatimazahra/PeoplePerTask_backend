@@ -2,7 +2,7 @@
 include 'data_connection/database.php';
 
 $email = ($_SESSION['UserID']);
-$sql = "SELECT UserName FROM users where UserID = $email";
+$sql = "SELECT * FROM users where UserID = $email";
 $result = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_assoc($result);
@@ -73,9 +73,10 @@ $userName = $row['UserName'];
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-icon pe-md-0 position-relative" data-bs-toggle="dropdown">
                                 <!-- user img -->
-                                <img src="#" alt="icon">
+                                <img src="<?php echo urlencode($row['user_img']); ?>" alt="<?php echo $row['user_img']; ?>">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end position-absolute">
+                                <a class="dropdown-item" href="../index.php">Home</a>
                                 <a class="dropdown-item" href="../profil.php">Profile</a>
                                 <a class="dropdown-item" href="../project_client.php">Add project</a>
                                 <a class="dropdown-item" href="../logout.php">Log out</a>

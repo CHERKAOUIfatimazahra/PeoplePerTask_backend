@@ -17,7 +17,7 @@ require 'includes/header.php';
 <link href="https://select2.github.io/dist/css/select2.min.css" rel="stylesheet">
 <script src="https://select2.github.io/dist/js/select2.full.js"></script>
 
-<section class="section">
+<section class="project_client.php" >
 <div class="container-fluid">
 
 <div class="container">

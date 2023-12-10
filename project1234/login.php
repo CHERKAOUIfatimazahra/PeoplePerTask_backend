@@ -24,14 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if ($user_data['role'] == 'Admin') {
                     $_SESSION['UserID'] = $user_data['UserID'];
                     $_SESSION['role'] = $user_data['role'];
-                    header("Location: dashboard/freelancers.php");
+                    header("Location: dashboard/users.php");
                     die;
                 }
                 // Freelancer role
                 else if ($user_data['role'] == 'Freelancer') {
                     $_SESSION['UserID'] = $user_data['UserID'];
                     $_SESSION['role'] = $user_data['role'];
-                    header("Location: dashboard/freelancers.php");
+                    header("Location: dashboard/projects.php");
                     die;
                 }
                 // Client role

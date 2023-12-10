@@ -51,25 +51,38 @@ if (!isset($_SESSION['UserID'])) {
                     <thead>
                         <tr class="table-dark">
                             <th>Comment</th>
+                            <th>user name</th>
+                            <th>email</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         require './data_connection/database.php';
+                    if ($_SESSION['role'] == 'Admin'){
                         $userId = $_SESSION['UserID'];
-                        $query = "SELECT t.ID_Temoignage, t.Comment, u.UserName, u.UserID FROM Testimonials t
+                        $query = "SELECT t.ID_Temoignage, t.Comment, u.UserName,u.email, u.UserID FROM Testimonials t
+                        INNER JOIN users u ON u.UserID = t.UserID";
+                    }
+                    else{
+                        $userId = $_SESSION['UserID'];
+                        $query = "SELECT t.ID_Temoignage, t.Comment, u.UserName,u.email, u.UserID FROM Testimonials t
                       INNER JOIN users u ON u.UserID = t.UserID
                       WHERE u.UserID = $userId";
-
+                    }
                         $res = mysqli_query($con, $query);
                         if (mysqli_num_rows($res) > 0):
                             while ($row = mysqli_fetch_assoc($res)):
                                 echo "<tr>";
                                 echo "<td>" . $row['Comment'] . "</td>";
+                                echo "<td>" . $row['UserName'] . "</td>";
+                                echo "<td>" . $row['email'] . "</td>";
+                                if ( $_SESSION['role'] == 'Client' || $_SESSION['role'] == 'Freelancer'){
                                 echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateTestimonial(' . $row['ID_Temoignage'] . ' , \''. $row['Comment'] .'\' , '. $row['UserID'] .')" >Modify</button> 
-                                <button type="button" onclick="delete_testimonial(' . $row['ID_Temoignage'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
-                                echo "</tr>";
+                                </div></td>';}
+                                if ( $_SESSION['role'] == 'Admin'){
+                                    echo '<td><div style="display:flex;"><button type="button" onclick="delete_testimonial(' . $row['ID_Temoignage'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
+                                echo "</tr>";}
                             endwhile;
                         endif;
                         ?>

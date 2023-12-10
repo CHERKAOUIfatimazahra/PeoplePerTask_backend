@@ -22,16 +22,15 @@ if (!isset($_SESSION['UserID'])) {
   <!-- Primary Button -->
   <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
                                data-bs-target="#exampleModalCenter1"> ADD user</button>
-<button style="display:none;" type="button" id="open_modal_button" class="btn btn-success" data-bs-toggle="modal"
-data-bs-target="#exampleModalCenter"></button> 
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class="table-dark">
+                            <th>img</th>
                             <th>User</th>
                             <th>Email</th>
-                            <th>img</th>
                             <th>OtherRelevantInformation</th>
                             <th>Role</th>
+                            <th ></th>
                             <th ></th>
                         </tr>
                     </thead>
@@ -44,13 +43,22 @@ data-bs-target="#exampleModalCenter"></button>
                             if (mysqli_num_rows($res) > 0) :
                                 while ($row = mysqli_fetch_assoc($res)) :
                                     echo "<tr>";
+                                    echo "<td>" . $row['user_img'] . "</td>";
                                     echo "<td>" . $row['UserName'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td>" . $row['user_img'] . "</td>";
                                     echo "<td>" . $row['OtherRelevantInformation'] . "</td>";
-                                    echo "<td>" . $row['role'] . "</td>";
+                                    echo '<td>
+                                            <form method="post" action="">
+                                                <input type="hidden" name="UserID" value="' . $row['UserID'] . '">
+                                                <select name="new_role" onchange="this.form.submit()">
+                                                    <option value="Freelancer" ' . ($row['role'] == 'Freelancer' ? 'selected' : '') . '>Freelancer</option>
+                                                    <option value="Client" ' . ($row['role'] == 'Client' ? 'selected' : '') . '>Client</option>
+                                                </select>
+                                            </form>
+                                          </td>';
+                                    echo "<td></td>";
                                     // modefy delet
-                                    echo '<td><div style="display:flex;"><button type="button" class="btn btn-success" onclick="updateUser(' . $row['UserID'] . ' , \'' . $row['UserName'] . '\' , \'' . $row['Password'] .'\' , \'' . $row['email'] .'\' ,\'' . $row['user_img'] .'\', \''. $row['OtherRelevantInformation'] .'\', \''. $row['role'] .'\')" >Modify</button> 
+                                    echo '<td><div style="display:flex;"> 
                                     <button type="button" onclick="delete_user(' . $row['UserID'] . ')" class="btn btn-danger mx-2">Delete</button></div></td>';
                                     echo "</tr>";
                                 endwhile;
@@ -92,30 +100,14 @@ data-bs-target="#exampleModalCenter"></button>
                         <!-- img -->
                         <form>
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">add your image</label>
-                                <input type="file" name="update_img" class="form-control-file" id="exampleFormControlFile1">
+                                <label for="update_img">Add your image</label>
+                                <input type="file" name="update_img" class="form-control-file" id="update_img">
                             </div>
                         </form>
                         <div class="mb-3">
                             <label for="update_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="update_info" id="update_info"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="update_role" class="col-form-label">Role</label>
-                            <select class="form-control" name="update_role" id="update_role"><?php
-                                require './data_connection/database.php';
-                                $query = "select role from users";
-
-                                $res = mysqli_query($con, $query);
-                                if (mysqli_num_rows($res) > 0) :
-                                    while ($row = mysqli_fetch_assoc($res)) :
-                                        echo '<option class="text-gray-500" value="' . $row['role'] . ';"></option>';
-                                    endwhile;
-                                endif;
-                            ?>
-                            </select>
-                        </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -158,10 +150,6 @@ data-bs-target="#exampleModalCenter"></button>
                             <label for="relevant_info" class="col-form-label">Other Relevant Information</label>
                             <textarea class="form-control" name="relevant_info" id="relevant_info"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="role" class="col-form-label">Role</label>
-                            <textarea class="form-control" name="role" id="role"></textarea>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -183,26 +171,26 @@ data-bs-target="#exampleModalCenter"></button>
     <script src="js_fill/dashboard.js"></script>
     <script src="js_fill/script.js"></script>
     <script>
-        function add_user() {
-            document.getElementById("add_user_form").submit();
-        };
+    function add_user() {
+        document.getElementById("add_user_form").submit();
+    }
 
-        function submitUpdate() {
-            document.getElementById("update_user_form").submit();
-        }
+    function submitUpdate() {
+        document.getElementById("update_user_form").submit();
+    }
 
-        function updateUser(id , UserName , Password, email , user_img, OtherRelevantInformation) {
-            document.getElementById("update_id").value = id;
-            document.getElementById("update_name").value = UserName;
-            document.getElementById("update_password").value = Password;
-            document.getElementById("update_email").value = email;
-            document.getElementById("update_img").value = user_img;
-            document.getElementById("update_info").value = OtherRelevantInformation;
+    function updateUser(id, UserName, Password, email, user_img, OtherRelevantInformation) {
+        document.getElementById("update_id").value = id;
+        document.getElementById("update_name").value = UserName;
+        document.getElementById("update_password").value = Password;
+        document.getElementById("update_email").value = email;
+        document.getElementById("update_img").value = user_img; 
+        document.getElementById("update_info").value = OtherRelevantInformation;
 
-            document.getElementById('open_modal_button').click();
-        };
+        document.getElementById('open_modal_button').click();
+    }
 
-        function delete_user(id) {
+    function delete_user(id) {
         // confirmation deleting
         const confirmed = confirm("Are you sure you want to delete this user?");
         
@@ -210,8 +198,5 @@ data-bs-target="#exampleModalCenter"></button>
             document.getElementById("delete_id").value = id;
             document.getElementById("delete_user_form").submit();
         }
-    };
-    </script>
-</body>
-
-</html>
+    }
+</script>
