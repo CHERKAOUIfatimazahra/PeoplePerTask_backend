@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'includes/header.php';
 include 'dashboard/data_connection/database.php';
 
 if (!isset($_SESSION['UserID'])) {
@@ -8,9 +8,6 @@ if (!isset($_SESSION['UserID'])) {
     exit();
 }
 
-?>
-<?php
-require 'includes/header.php';
 ?>
 <section class="py-lg-14 py-3">
     <div class="container">
@@ -27,7 +24,6 @@ require 'includes/header.php';
 </section>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<div class="container">
 <?php
   require 'dashboard/data_connection/database.php';
   $userId = $_SESSION['UserID'];
@@ -38,8 +34,9 @@ require 'includes/header.php';
   if (mysqli_num_rows($res) > 0) :
     while ($row = mysqli_fetch_assoc($res)) :
 ?>
+<div class="container">
 <div class="row">
-    <div class="col-xl-8">
+    <div class="col-xl-12">
         <div class="card">
             <div class="card-body pb-0">
                 <div class="row align-items-center">
@@ -219,5 +216,6 @@ require 'includes/header.php';
 
 <?php endwhile;
 endif?>
+
 <!-- footer -->
 <?php require 'includes/footer.php';?>

@@ -1,5 +1,4 @@
 <?php 
-session_start();
   require 'dashboard/data_connection/database.php';
 ?> 
 <?php
@@ -52,15 +51,23 @@ require 'includes/header.php';
                         </div>
         
                         <!-- Tags -->
+<?php
+  require 'dashboard/data_connection/database.php';
+  $query = "SELECT t.tag_name
+  FROM project_tags pt
+  JOIN tags t ON t.tag_id = pt.tag_id
+  WHERE pt.Project_ID = $id_project";
+        $res = mysqli_query($con, $query);
+          if (mysqli_num_rows($res) > 0) :
+?>
                         <div class="nav tag-cloud">
-                            <a href="#">Design</a>
-                            <a href="#">Development</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Web Design</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Research</a>
-                            <a href="#">Managment</a>
+                        <?php while ($row = mysqli_fetch_assoc($res)) :?>
+                            <a href="#"><?php echo $row['tag_name'];?></a>
+                        <?php endwhile;?>    
                         </div>
+                        <?php
+            endif;
+          ?>    
                     </article>
 <!-- button for offers -->
 
@@ -203,17 +210,23 @@ require 'includes/header.php';
                             <h3>Latest Tags</h3>
                         </div>
                         <div class="widget-body">
-                            <div class="nav tag-cloud">
-                                <a href="#">Design</a>
-                                <a href="#">Development</a>
-                                <a href="#">Travel</a>
-                                <a href="#">Web Design</a>
-                                <a href="#">Marketing</a>
-                                <a href="#">Research</a>
-                                <a href="#">Managment</a>
-                            </div>
+                        <?php
+  require 'dashboard/data_connection/database.php';
+  $query = "SELECT t.tag_name
+  FROM project_tags pt
+  JOIN tags t ON t.tag_id = pt.tag_id
+  WHERE pt.Project_ID = $id_project";
+        $res = mysqli_query($con, $query);
+          if (mysqli_num_rows($res) > 0) :
+?>
+                        <div class="nav tag-cloud">
+                        <?php while ($row = mysqli_fetch_assoc($res)) :?>
+                            <a href="#"><?php echo $row['tag_name'];?></a>
+                        <?php endwhile;?>    
                         </div>
-                    </div>
+                        <?php
+            endif;
+          ?>    
                     <!-- End widget Tags -->
                 </div>
             </div>
@@ -221,8 +234,8 @@ require 'includes/header.php';
         <?php endif;?>
         <?php endif;}?> 
     </div>
-<?php
-function add_offer() {
+<?php 
+function add_offer(){
     document.getElementById("add_offer_form").submit();
 }
 require 'includes/footer.php';

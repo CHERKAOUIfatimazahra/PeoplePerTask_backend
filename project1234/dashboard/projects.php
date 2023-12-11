@@ -41,7 +41,7 @@ if (!isset($_SESSION['UserID'])) {
                         require './data_connection/database.php';
                         if ($_SESSION['role'] == 'Admin'){
                             $userId = $_SESSION['UserID'];
-                            $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name  
+                            $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name
                             FROM Projects p
                             JOIN categories c ON c.Category_ID = p.Category_ID
                             JOIN sub_Categories sc ON sc.sub_Category_ID = p.sub_Category_ID"; 
@@ -49,11 +49,11 @@ if (!isset($_SESSION['UserID'])) {
                         else{
                         $userId = $_SESSION['UserID'];
                         
-                        $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name  
+                        $query = "SELECT p.Project_ID, p.Project_Title, p.Descrip_project, c.CategoryName, c.Category_ID, sc.sub_Category_ID, sc.sub_category_Name 
                             FROM Projects p
                             JOIN categories c ON c.Category_ID = p.Category_ID
                             JOIN sub_Categories sc ON sc.sub_Category_ID = p.sub_Category_ID
-                            WHERE p.UserID = $userId"; 
+                            WHERE p.UserID = $userId";
                         }
                         $res = mysqli_query($con, $query);
                         
@@ -91,6 +91,7 @@ if (!isset($_SESSION['UserID'])) {
                         <span aria-hidden="true"></span>
                     </button>
                 </div>
+        <!-- add project -->
                 <div class="modal-body">
                 <form id="add_project_form" action="./projects_CRUD/add_project.php" method="POST">
                         <div class="mb-3">
@@ -132,6 +133,10 @@ if (!isset($_SESSION['UserID'])) {
                                 endif;
                             ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter your tags</label>
+                            <input type="text" name="tags" id="tags" class="form-control" />
                         </div>
                     </form>
                 </div>
@@ -193,20 +198,9 @@ if (!isset($_SESSION['UserID'])) {
                             ?>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="update_sub_Category_ID" id="update_sub_Category_ID">
-                            <?php
-                                require './data_connection/database.php';
-                                $query = "select sc.sub_Category_ID , sc.sub_category_Name  from sub_Categories sc";
-
-                                $res = mysqli_query($con, $query);
-                                if (mysqli_num_rows($res) > 0) :
-                                    while ($row = mysqli_fetch_assoc($res)) :
-                                        echo '<option class="text-gray-500" value="' . $row['sub_Category_ID'] . '">'. $row['sub_category_Name']  .'</option>';
-                                    endwhile;
-                                endif;
-                            ?>
-                            </select>
+                        <div class="form-group">
+                            <label>Enter your tags</label>
+                            <input type="text" name="update_tags" id="update_tags" class="form-control" />
                         </div>
                     </form>
                 </div>
@@ -237,12 +231,13 @@ if (!isset($_SESSION['UserID'])) {
             document.getElementById("update_project_form").submit();
         }
 
-        function updateProject(id , project_title , project_desc , cat_id , sub_cat_id) {
+        function updateProject(id , project_title , project_desc , cat_id , sub_cat_id,tags_name) {
             document.getElementById("update_id").value = id;
             document.getElementById("update_Project_Title").value = project_title;
             document.getElementById("update_Descrip_project").value = project_desc;
             document.getElementById("update_Category_ID").value = cat_id;
             document.getElementById("update_sub_Category_ID").value = sub_cat_id;
+            document.getElementById("update_tags").value = tags_name;
 
             document.getElementById('open_modal_button').click();
         };
@@ -275,6 +270,9 @@ if (!isset($_SESSION['UserID'])) {
   });
 </script>
 </div>
+<!-- add tags -->
+
+</script>
 </body>
 
 </html>

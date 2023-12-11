@@ -1,6 +1,5 @@
 <?php
-
-session_start();
+require 'includes/header.php';
 
 require 'dashboard/data_connection/database.php';
 
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 else if ($user_data['role'] == 'Freelancer') {
                     $_SESSION['UserID'] = $user_data['UserID'];
                     $_SESSION['role'] = $user_data['role'];
-                    header("Location: dashboard/projects.php");
+                    header("Location: dashboard/offers.php");
                     die;
                 }
                 // Client role
@@ -53,9 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 ?>
-<?php
-require 'includes/header.php';
-?>
+
 
     <section class="vh-100 bg-image"
     style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">

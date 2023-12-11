@@ -7,8 +7,18 @@ if (!isset($_SESSION['UserID'])) {
     header("Location: ../login.php");
     exit();
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_ID = $_POST['UserID'];
+    $newRole = $_POST['new_role'];
 
+    // Validate and sanitize user inputs as needed
+
+    // Update the status in the database
+    $updateQuery = "UPDATE users SET role = '$newRole' WHERE UserID = $user_ID";
+    mysqli_query($con, $updateQuery);
+}
 ?>
+
 <body>
     <div class="wrapper">
             <?php
@@ -48,11 +58,12 @@ if (!isset($_SESSION['UserID'])) {
                                     echo "<td>" . $row['email'] . "</td>";
                                     echo "<td>" . $row['OtherRelevantInformation'] . "</td>";
                                     echo '<td>
-                                            <form method="post" action="">
+                                            <form method="post" action="users.php">
                                                 <input type="hidden" name="UserID" value="' . $row['UserID'] . '">
                                                 <select name="new_role" onchange="this.form.submit()">
                                                     <option value="Freelancer" ' . ($row['role'] == 'Freelancer' ? 'selected' : '') . '>Freelancer</option>
                                                     <option value="Client" ' . ($row['role'] == 'Client' ? 'selected' : '') . '>Client</option>
+                                                    <option value="Admin" ' . ($row['role'] == 'Admin') . '>Admin</option>
                                                 </select>
                                             </form>
                                           </td>';

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'includes/header.php';
 require 'dashboard/data_connection/database.php';
 if($_SERVER['REQUEST_METHOD'] == "POST")
     {
@@ -27,9 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
       }
   }
 ?>;
-<?php
-require 'includes/header.php';
-?>
+
 <section class="py-lg-14 py-3">
     <div class="container">
       <div class="row justify-content-center">

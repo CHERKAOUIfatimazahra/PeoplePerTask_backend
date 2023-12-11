@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'includes/header.php';
 include 'dashboard/data_connection/database.php';
 
 if (!isset($_SESSION['UserID'])) {
@@ -8,9 +8,7 @@ if (!isset($_SESSION['UserID'])) {
     exit();
 }
 ?>
-<?php
-require 'includes/header.php';
-?> 
+
 <!-- add project -->
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -53,7 +51,7 @@ require 'includes/header.php';
           <h3 class="h6 mb-4">Description</h3>
           <div class="mb-3">
             <label class="form-label">Address Line 1</label>
-            <textarea type="text" class="form-control"></textarea>
+            <textarea type="text" class="form-control" name="Descrip_project"></textarea>
           </div>
         </div>
       </div>
@@ -64,10 +62,19 @@ require 'includes/header.php';
       <div class="card mb-4">
         <div class="card-body">
           <h3 class="h6">categorie</h3>
+          
           <select class="form-select">
-            <option value="draft" selected="">Draft</option>
-            <option value="active">Active</option>
-            <option value="active">Inactive</option>
+          <?php
+  require 'dashboard/data_connection/database.php';
+  $query = "select CategoryName from categories";
+  
+  $res = mysqli_query($con, $query);
+  if (mysqli_num_rows($res) > 0) :
+  ?>
+          <?php while ($row = mysqli_fetch_assoc($res)) :?><a class="dropdown-item" href="recherch.php"><?php echo $row['CategoryName'];?></a>
+            <option value="active"><?php echo $row['CategoryName'];?></a></option>
+            <?php endwhile;?>
+            <?php endif;?>
           </select>
         </div>
       </div>

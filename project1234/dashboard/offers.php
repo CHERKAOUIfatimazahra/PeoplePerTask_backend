@@ -9,13 +9,13 @@ if (!isset($_SESSION['UserID'])) {
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $projectId = $_POST['project_id'];
+    $Offre_ID = $_POST['Offre_ID'];
     $newStatus = $_POST['new_status'];
 
     // Validate and sanitize user inputs as needed
 
     // Update the status in the database
-    $updateQuery = "UPDATE offres SET status = '$newStatus' WHERE Project_ID = $projectId";
+    $updateQuery = "UPDATE offres SET status = '$newStatus' WHERE Offre_ID = $Offre_ID";
     mysqli_query($con, $updateQuery);
 }
 
@@ -54,16 +54,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </thead>
                         <tbody>
                             <?php
-                        if ($_SESSION['role'] == 'Freelancer'){
+                        if ($_SESSION['role'] == 'Freelancer') {
                             $userId = $_SESSION['UserID'];
-
+                        
                             $query = "SELECT p.Project_Title, o.Amount, o.Deadline, o.message, o.status, o.Project_ID 
                                       FROM offres o
                                       JOIN projects p ON p.Project_ID = o.Project_ID
                                       WHERE o.UserID = $userId";
-
+                        
                             $res = mysqli_query($con, $query);
-
+                        
                             if (mysqli_num_rows($res) > 0) :
                                 while ($row = mysqli_fetch_assoc($res)) :
                                     echo "<tr>";
@@ -72,13 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     echo "<td>" . $row['Deadline'] . "</td>";
                                     echo "<td>" . $row['message'] . "</td>";
                                     echo "<td>" . $row['status'] . "</td>";
+                                    echo "<td></td>";
                                     echo "</tr>";
                                 endwhile;
                             endif;
                         }if ($_SESSION['role'] == 'Client'){
                             $userId = $_SESSION['UserID'];
 
-                            $query = "SELECT p.Project_Title, u.UserName, o.Amount, o.Deadline, o.message, o.status, o.Project_ID 
+                            $query = "SELECT p.Project_Title, u.UserName, o.Offre_ID, o.Amount, o.Deadline, o.message, o.status, o.Project_ID 
                                       FROM offres o
                                       JOIN projects p ON p.Project_ID = o.Project_ID
                                       JOIN users u ON u.UserID = o.UserID";
@@ -94,8 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     echo "<td>" . $row['Deadline'] . "</td>";
                                     echo "<td>" . $row['message'] . "</td>";
                                     echo '<td>
-                                            <form method="post" action="">
-                                                <input type="hidden" name="project_id" value="' . $row['Project_ID'] . '' . $row['UserID'] . '">
+                                            <form method="post" action="offers.php">
+                                                 <input type="hidden" name="project_id" value="' . $row['Project_ID'] . '">
+                                                 <input type="hidden" name="Offre_ID" value="' . $row['Offre_ID'] . '">
                                                 <select name="new_status" onchange="this.form.submit()">
                                                     <option value="Pending" ' . ($row['status'] == 'Pending' ? 'selected' : '') . '>Pending</option>
                                                     <option value="Approved" ' . ($row['status'] == 'Approved' ? 'selected' : '') . '>Approved</option>

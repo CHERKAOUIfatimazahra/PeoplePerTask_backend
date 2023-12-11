@@ -35,9 +35,6 @@ include 'data_connection/database.php';
     <!-- <li class="sidebar_item <?=$dashboard_active?>" style="width: 100%;">
         <a href="dashboard.php" class="sidebar_link"> <img src="img/1. overview.svg" alt="icon">statistics</a>
     </li> -->
-    <li class="sidebar_item <?=$projects_active?>">
-        <a href="Projects.php" class="sidebar_link"> <img src="img/task.svg" alt="icon">Projects</a>
-    </li>
     <li class="sidebar_item <?=$categorys_active?>">
         <a href="offers.php" class="sidebar_link"><img src="img/agent.svg" alt="icon">offers</a>
     </li>

@@ -104,16 +104,14 @@ require 'includes/header.php';
           </div>
         </div>
         <div class="row z-index-modifier">
-          <?php while ($row = mysqli_fetch_assoc($res)) :?>
+        <?php while ($row = mysqli_fetch_assoc($res)) :?>
           <div class=" col-lg-4 col-md-6 col-12 my-4 d-flex flex-column align-items-center ">
-
             <div class="card" style="max-width: 23rem;">
               <img class="my-2 " src="<?php echo $row['user_img']; ?>" alt="user_img" style="height: 9rem; ">
-              <div class="card-body " >
-                <div class="card-head">
-                  <h5 class="card-title fw-semibold text-center"><?php echo $row['UserName']; ?></h5>
-                </div>
-  
+                <div class="card-body " >
+                  <div class="card-head">
+                    <h5 class="card-title fw-semibold text-center"><?php echo $row['UserName']; ?></h5>
+                  </div>
                   <p class="text-center ">full-Stack Developer</p> 
                   <div class="d-flex align-items-center justify-content-center">
                     <img src="images/Star_light.svg" alt="star for reviews">
@@ -122,16 +120,18 @@ require 'includes/header.php';
                     <img src="images/Star_light.svg" alt="star for reviews">
                     <img src="images/Star_lightimpty.svg" alt="">
                   </div>
-                  
                   <p class="card-text text-center"><?php echo $row['OtherRelevantInformation']; ?></p>
-                    <div class="hero-button d-flex justify-content-center my-2">
-                      <a class="btn btn-primary primary-btn-orange" href="#">Get started</a>
-                    </div>
+                  <p class="card-text text-center">your gateway to a diverse community of skilled freelancers ready to bring your
+                projects to life.</p>
+                  <div class="hero-button d-flex justify-content-center my-2">
+                    <a class="btn btn-primary primary-btn-orange" href="regester.php">Get started</a>
                   </div>
-              </div> 
-            </div>
+                </div>
+            </div> 
           </div>
           <?php endwhile;?>
+        </div>
+          
         <div  class="row">
           <div class="col-12 d-flex justify-content-center">
             <button id="loadmore" class="btn btn-primary primary-btn-orange">Load More</button>
